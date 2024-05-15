@@ -20,12 +20,14 @@ config/icon="res://icon.svg"
 
 Global="*res://Scripts/global.gd"
 
+[debug]
+
+settings/stdout/print_fps=true
+
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/borderless=true
-window/vsync/vsync_mode=0
 
 [input]
 
@@ -74,3 +76,8 @@ Jump={
 "events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":1.0,"script":null)
 ]
 }
+
+[layer_names]
+
+3d_physics/layer_1="World"
+3d_physics/layer_2="Player"

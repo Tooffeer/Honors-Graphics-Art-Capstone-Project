@@ -33,7 +33,7 @@ margin = 0.06
 script = ExtResource("2_gte4c")
 
 [node name="Label" type="Label" parent="CanvasLayer"]
-offset_left = 613.0
-offset_top = 453.0
-offset_right = 653.0
-offset_bottom = 476.0
+offset_left = 45.0
+offset_top = 41.0
+offset_right = 85.0
+offset_bottom = 64.0

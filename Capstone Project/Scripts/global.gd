@@ -2,5 +2,7 @@ extends Node
 
 var playerNode : Node = null
 
-func getPlayerNode(node):
+var collectables = 0
+
+func setPlayerNode(node):
 	playerNode = node
