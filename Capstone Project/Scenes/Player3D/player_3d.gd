@@ -4,7 +4,8 @@ extends CharacterBody3D
 @onready var spring_arm_3d = $Pivot/SpringArm3D
 
 # Camera variables
-var camSensitivity = 0.062
+@export var verCamSensitivity : float  = 0.062
+@export var horCamSensitivity : float = 0.062
 
 # Movement variables
 @export var moveSpeed : float = 7.5
@@ -18,10 +19,15 @@ var DEACCEL = accel
 # Jumping variables
 @export var jumpHeight : float = 2.3
 @export var timeToPeak : float = 0.36
-@export var timeToFall : float = 0.32
+@export var timeToFall: float = 0.32
+@export var coyoteTime : float = 0.22
+var coyoteTimer : float = 0.0
+var canJump : bool = true
+
 
 func _ready():
 	Global.setPlayerNode(self)
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 # Runs every physics frame
 func _physics_process(delta):
@@ -51,15 +57,15 @@ func _physics_process(delta):
 	
 	jump(delta)
 	move_and_slide()
-	camera()
+	camera(delta)
 
-# Move camera
-func camera():
+# Camera rotation
+func camera(delta):
 	var input_axis = -Input.get_vector("Camera Left", "Camera Right", "Camera Down", "Camera Up")
-	pivot.rotate_y(input_axis.x * camSensitivity)
-	spring_arm_3d.rotate_x(input_axis.y * camSensitivity)
+	pivot.rotate_y(input_axis.x * horCamSensitivity)
+	spring_arm_3d.rotate_x(input_axis.y * verCamSensitivity)
 	
-	spring_arm_3d.rotation.x = clamp(spring_arm_3d.rotation.x, deg_to_rad(-70), deg_to_rad(50))
+	spring_arm_3d.rotation.x = clamp(spring_arm_3d.rotation.x, deg_to_rad(-45), deg_to_rad(40))
 
 # "Building a Better Jump" - J. Kyle Pittman
 func jump(delta):
@@ -67,13 +73,20 @@ func jump(delta):
 	var jumpGravity : float = -(2.0 * jumpHeight) / pow(timeToPeak, 2.0)
 	var fallGravity : float = -(2.0 * jumpHeight) / pow(timeToFall, 2.0)
 	
-	# Apply gravity
 	if not is_on_floor():
+		# Apply gravity
 		velocity.y += getGravity(jumpGravity, fallGravity) * delta
+		# Start coyote timer
+		coyoteTimer += delta
+	else:
+		# Reset coyote timer
+		coyoteTimer = 0.0
+		canJump = true
 	
-	# Jumping
-	if Input.is_action_just_pressed("Jump"):
+	# Jump
+	if Input.is_action_pressed("Jump") and canJump and coyoteTimer <= coyoteTime:
 		velocity.y = jumpVelocity
+		canJump = false
 
 # Determine gravity
 func getGravity(jumpGravity, fallGravity):

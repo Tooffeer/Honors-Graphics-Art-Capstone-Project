@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://t1fxqyckyofj"]
+[gd_scene load_steps=7 format=3 uid="uid://t1fxqyckyofj"]
 
 [ext_resource type="Script" path="res://Scenes/Player3D/player_3d.gd" id="1_ig6b7"]
+[ext_resource type="Script" path="res://Scripts/MeshInterpolation.gd" id="2_4282y"]
+[ext_resource type="Script" path="res://Scenes/Player3D/CameraInterpolation.gd" id="2_cdqoc"]
 [ext_resource type="Script" path="res://Scenes/Player3D/CanvasLayer.gd" id="2_gte4c"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_bsjdu"]
@@ -12,22 +14,37 @@ height = 1.5
 [node name="Player3D" type="CharacterBody3D"]
 collision_layer = 2
 script = ExtResource("1_ig6b7")
+verCamSensitivity = 0.042
 moveSpeed = 7.25
+accel = 16.675
+deaccel = 9.115
+airAccel = 5.26
+airDeaccel = 0.39
+jumpHeight = 2.335
+timeToPeak = 0.35
+timeToFall = 0.31
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_bsjdu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
 mesh = SubResource("CylinderMesh_oiohl")
+script = ExtResource("2_4282y")
 
 [node name="Pivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50168, 0)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50168, 0)
 spring_length = 5.5
 margin = 0.06
 
-[node name="Camera3D" type="Camera3D" parent="Pivot/SpringArm3D"]
+[node name="Marker3D" type="Marker3D" parent="Pivot/SpringArm3D"]
+
+[node name="CameraRoot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50168, 0)
+script = ExtResource("2_cdqoc")
+
+[node name="Camera3D" type="Camera3D" parent="CameraRoot"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("2_gte4c")
