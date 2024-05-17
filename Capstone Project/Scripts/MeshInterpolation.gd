@@ -1,4 +1,4 @@
-extends MeshInstance3D
+extends Node3D
 @export_node_path("MeshInstance3D") var followTarget
 
 var target : Node

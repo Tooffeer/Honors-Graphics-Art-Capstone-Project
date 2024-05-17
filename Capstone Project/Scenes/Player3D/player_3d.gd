@@ -4,7 +4,7 @@ extends CharacterBody3D
 @onready var spring_arm_3d = $Pivot/SpringArm3D
 
 # Camera variables
-@export var verCamSensitivity : float  = 0.062
+@export var verCamSensitivity : float  = 0.04
 @export var horCamSensitivity : float = 0.062
 
 # Movement variables
