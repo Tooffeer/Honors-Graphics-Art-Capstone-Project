@@ -6,5 +6,8 @@ extends CanvasLayer
 func _ready():
 	updateInfo()
 
+func _process(delta):
+	updateInfo()
+
 func updateInfo():
 	label.text = "Collectables: " + str(Global.collectables)

@@ -24,13 +24,15 @@ var DEACCEL = accel
 var coyoteTimer : float = 0.0
 var canJump : bool = true
 
-
 func _ready():
 	Global.setPlayerNode(self)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 # Runs every physics frame
 func _physics_process(delta):
+	camera()
+	
+	
 	# Get input and direction based off camera
 	var input_axis = Input.get_vector("Left", "Right", "Forward", "Backward")
 	var direction = (pivot.basis * Vector3(input_axis.x, 0, input_axis.y)).normalized()
@@ -55,12 +57,13 @@ func _physics_process(delta):
 	velocity.x = clamp(velocity.x, -moveSpeed, moveSpeed)
 	velocity.z = clamp(velocity.z, -moveSpeed, moveSpeed)
 	
-	jump(delta)
+	jump(delta, direction)
+	
 	move_and_slide()
-	camera(delta)
+
 
 # Camera rotation
-func camera(delta):
+func camera():
 	var input_axis = -Input.get_vector("Camera Left", "Camera Right", "Camera Down", "Camera Up")
 	pivot.rotate_y(input_axis.x * horCamSensitivity)
 	spring_arm_3d.rotate_x(input_axis.y * verCamSensitivity)
@@ -68,7 +71,7 @@ func camera(delta):
 	spring_arm_3d.rotation.x = clamp(spring_arm_3d.rotation.x, deg_to_rad(-45), deg_to_rad(40))
 
 # "Building a Better Jump" - J. Kyle Pittman
-func jump(delta):
+func jump(delta, direction):
 	var jumpVelocity : float = (2.0 * jumpHeight) / timeToPeak
 	var jumpGravity : float = -(2.0 * jumpHeight) / pow(timeToPeak, 2.0)
 	var fallGravity : float = -(2.0 * jumpHeight) / pow(timeToFall, 2.0)
@@ -87,6 +90,12 @@ func jump(delta):
 	if Input.is_action_pressed("Jump") and canJump and coyoteTimer <= coyoteTime:
 		velocity.y = jumpVelocity
 		canJump = false
+	
+	# Dive
+	#if Input.is_action_just_pressed("Dive"):
+		#velocity.y = jumpVelocity/2
+		#velocity.x = 200 * direction.x
+		#velocity.z = 200 * direction.z
 
 # Determine gravity
 func getGravity(jumpGravity, fallGravity):

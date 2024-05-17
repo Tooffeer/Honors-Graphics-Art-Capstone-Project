@@ -11,12 +11,12 @@ height = 1.5
 [sub_resource type="CylinderMesh" id="CylinderMesh_oiohl"]
 height = 1.5
 
-[node name="Player3D" type="CharacterBody3D"]
+[node name="Player3D" type="CharacterBody3D" groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_ig6b7")
 verCamSensitivity = 0.042
 moveSpeed = 7.25
-accel = 16.675
+accel = 19.365
 deaccel = 9.115
 airAccel = 5.26
 airDeaccel = 0.39
@@ -50,7 +50,7 @@ script = ExtResource("2_cdqoc")
 script = ExtResource("2_gte4c")
 
 [node name="Label" type="Label" parent="CanvasLayer"]
-offset_left = 613.0
-offset_top = 453.0
-offset_right = 653.0
-offset_bottom = 476.0
+offset_right = 111.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 43
+text = "Collectables: 0"

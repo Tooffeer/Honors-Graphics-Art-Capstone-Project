@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://ciaptb12k2hni"]
+[gd_scene load_steps=7 format=3 uid="uid://ciaptb12k2hni"]
+
+[ext_resource type="PackedScene" uid="uid://y0qwee3fait1" path="res://Scenes/Collectable/collectable.tscn" id="1_5qeyd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dc4ie"]
-size = Vector3(25, 1, 25)
+size = Vector3(26, 1, 26)
 
 [sub_resource type="BoxMesh" id="BoxMesh_5j8oc"]
-size = Vector3(25, 1, 25)
+size = Vector3(26, 1, 26)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_omtrg"]
 
@@ -31,3 +33,12 @@ transform = Transform3D(0.707107, -3.09086e-08, 0.707107, -0.707107, -3.09086e-0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_j15kw")
+
+[node name="Collectable" parent="." instance=ExtResource("1_5qeyd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06692, -5.88177)
+
+[node name="Collectable2" parent="." instance=ExtResource("1_5qeyd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.13383, 8.092)
+
+[node name="Collectable3" parent="." instance=ExtResource("1_5qeyd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.13486, 1.06692, -5.88177)
