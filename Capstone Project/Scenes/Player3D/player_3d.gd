@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 @onready var pivot = $Pivot
 @onready var spring_arm_3d = $Pivot/SpringArm3D
+@onready var model = $CollisionShape3D/Target
 
 # Camera variables
 @export var verCamSensitivity : float  = 0.04
@@ -30,9 +31,6 @@ func _ready():
 
 # Runs every physics frame
 func _physics_process(delta):
-	camera()
-	
-	
 	# Get input and direction based off camera
 	var input_axis = Input.get_vector("Left", "Right", "Forward", "Backward")
 	var direction = (pivot.basis * Vector3(input_axis.x, 0, input_axis.y)).normalized()
@@ -45,29 +43,34 @@ func _physics_process(delta):
 		ACCEL = airAccel
 		DEACCEL = airDeaccel
 	
+	camera()
+	
 	# Vertical movement
 	if direction:
-		velocity.x += direction.x * ACCEL * delta
-		velocity.z += direction.z * ACCEL * delta
+		velocity.x = direction.x * moveSpeed
+		velocity.z = direction.z * moveSpeed
+		#velocity.x += direction.x * ACCEL * delta
+		#velocity.z += direction.z * ACCEL * delta
 	else:
-		velocity.x -= velocity.x * DEACCEL * delta
-		velocity.z -= velocity.z * DEACCEL * delta
+		velocity.x = move_toward(velocity.x, 0, 1)
+		velocity.z = move_toward(velocity.z, 0, 1)
+		#velocity.x -= velocity.x * DEACCEL * delta
+		#velocity.z -= velocity.z * DEACCEL * delta
 	
 	# Limit velocity
-	velocity.x = clamp(velocity.x, -moveSpeed, moveSpeed)
-	velocity.z = clamp(velocity.z, -moveSpeed, moveSpeed)
+	#velocity.x = clamp(velocity.x, -moveSpeed, moveSpeed)
+	#velocity.z = clamp(velocity.z, -moveSpeed, moveSpeed)
 	
 	jump(delta, direction)
 	
 	move_and_slide()
-
+	model.rotation.y = atan2(velocity.x, velocity.z)
 
 # Camera rotation
 func camera():
 	var input_axis = -Input.get_vector("Camera Left", "Camera Right", "Camera Down", "Camera Up")
 	pivot.rotate_y(input_axis.x * horCamSensitivity)
 	spring_arm_3d.rotate_x(input_axis.y * verCamSensitivity)
-	
 	spring_arm_3d.rotation.x = clamp(spring_arm_3d.rotation.x, deg_to_rad(-45), deg_to_rad(40))
 
 # "Building a Better Jump" - J. Kyle Pittman

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bwjh28gjl26rj"
-path="res://.godot/imported/RenameLater.blend-a2eb6d5573c0f083433c8f0078b5cc22.scn"
+uid="uid://tx4gafcm2182"
+path="res://.godot/imported/Mr. Mackinley.blend-10459188befa627ce2e5d978b0e4aa7a.scn"
 
 [deps]
 
-source_file="res://Assets/RenameLater/RenameLater.blend"
-dest_files=["res://.godot/imported/RenameLater.blend-a2eb6d5573c0f083433c8f0078b5cc22.scn"]
+source_file="res://Assets/Blender/Mr. Mackinley/Mr. Mackinley.blend"
+dest_files=["res://.godot/imported/Mr. Mackinley.blend-10459188befa627ce2e5d978b0e4aa7a.scn"]
 
 [params]
 

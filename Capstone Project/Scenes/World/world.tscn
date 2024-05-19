@@ -1,12 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://ciaptb12k2hni"]
+[gd_scene load_steps=9 format=3 uid="uid://ciaptb12k2hni"]
 
 [ext_resource type="PackedScene" uid="uid://y0qwee3fait1" path="res://Scenes/Collectable/collectable.tscn" id="1_5qeyd"]
+[ext_resource type="Texture2D" uid="uid://ca863qpfd1xqi" path="res://Assets/Textures/124px Tile.png" id="1_ands5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dc4ie"]
-size = Vector3(26, 1, 26)
+size = Vector3(100, 1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c0eys"]
+albedo_texture = ExtResource("1_ands5")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 2
 
 [sub_resource type="BoxMesh" id="BoxMesh_5j8oc"]
-size = Vector3(26, 1, 26)
+material = SubResource("StandardMaterial3D_c0eys")
+size = Vector3(100, 1, 100)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_omtrg"]
 
@@ -30,6 +39,7 @@ mesh = SubResource("BoxMesh_5j8oc")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -3.09086e-08, 0.707107, -0.707107, -3.09086e-08, 0.707107, 0, -1, -4.37114e-08, 0, 10, 0)
+shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_j15kw")

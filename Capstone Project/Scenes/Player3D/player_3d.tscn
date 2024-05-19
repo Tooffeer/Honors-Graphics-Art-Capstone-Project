@@ -1,17 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://t1fxqyckyofj"]
+[gd_scene load_steps=9 format=3 uid="uid://t1fxqyckyofj"]
 
 [ext_resource type="Script" path="res://Scenes/Player3D/player_3d.gd" id="1_ig6b7"]
+[ext_resource type="PackedScene" uid="uid://tx4gafcm2182" path="res://Assets/Blender/Mr. Mackinley/Mr. Mackinley.blend" id="2_c6oc5"]
 [ext_resource type="Script" path="res://Scenes/Player3D/CameraInterpolation.gd" id="2_cdqoc"]
 [ext_resource type="Script" path="res://Scenes/Player3D/CanvasLayer.gd" id="2_gte4c"]
+[ext_resource type="Script" path="res://Scenes/Player3D/MeshInterpolation.gd" id="3_q11yk"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_bsjdu"]
-height = 2.2294
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sl1dd"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2h164"]
+nodes/Animation/node = SubResource("AnimationNodeAnimation_sl1dd")
+nodes/Animation/position = Vector2(100, 140)
+node_connections = [&"output", 0, &"Animation"]
 
 [node name="Player3D" type="CharacterBody3D" groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_ig6b7")
 verCamSensitivity = 0.042
-moveSpeed = 8.205
+moveSpeed = 14.355
 accel = 22.22
 deaccel = 9.115
 airAccel = 5.26
@@ -21,22 +30,56 @@ timeToPeak = 0.35
 timeToFall = 0.31
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 shape = SubResource("CylinderShape3D_bsjdu")
 
+[node name="Target" type="Node3D" parent="CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+
+[node name="Mr_ Mackinley" parent="CollisionShape3D/Target" instance=ExtResource("2_c6oc5")]
+script = ExtResource("3_q11yk")
+
+[node name="Skeleton3D" parent="CollisionShape3D/Target/Mr_ Mackinley/Armature" index="0"]
+bones/0/position = Vector3(-2.59285e-08, -0.00885582, -0.0647408)
+bones/0/rotation = Quaternion(0.0378818, -1.19464e-07, 4.46146e-08, 0.999282)
+bones/1/rotation = Quaternion(0.46358, 0.0258338, 0.000677999, 0.885678)
+bones/2/rotation = Quaternion(0.504196, -0.00727118, 0.0116653, 0.86348)
+bones/3/rotation = Quaternion(-0.202972, 0.0512208, -0.44727, 0.869556)
+bones/3/scale = Vector3(1, 1, 1)
+bones/4/rotation = Quaternion(-0.0673544, -0.0433917, 0.288884, 0.954006)
+bones/4/scale = Vector3(1, 1, 1)
+bones/5/rotation = Quaternion(0.179373, 0.03225, 0.0270525, 0.98288)
+bones/5/scale = Vector3(1, 1, 1)
+bones/6/rotation = Quaternion(-0.202972, -0.0512206, 0.44727, 0.869556)
+bones/7/rotation = Quaternion(-0.0646874, 0.0381269, -0.265706, 0.961125)
+bones/7/scale = Vector3(1, 1, 1)
+bones/8/rotation = Quaternion(0.142949, -0.0677304, -0.0582814, 0.985688)
+bones/8/scale = Vector3(1, 1, 1)
+bones/9/position = Vector3(-1.26524e-08, -0.00885579, -0.0647408)
+bones/9/rotation = Quaternion(0.312525, 0.0163513, 0.772336, -0.552772)
+bones/9/scale = Vector3(1, 1, 1)
+bones/10/rotation = Quaternion(-0.0243887, 0.150169, -0.552092, 0.819786)
+bones/11/rotation = Quaternion(0.579268, -0.021253, -0.210335, 0.787246)
+bones/12/position = Vector3(1.26524e-08, -0.00885579, -0.0647408)
+bones/12/rotation = Quaternion(-0.497472, 0.21139, 0.711893, 0.448379)
+bones/12/scale = Vector3(1, 1, 1)
+bones/13/rotation = Quaternion(-0.0356935, -0.154175, 0.593322, 0.789256)
+bones/14/rotation = Quaternion(0.16672, 0.00207833, 0.0566117, 0.984376)
+
 [node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.77944, 0)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="Pivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50168, 0)
-spring_length = 5.5
+spring_length = 6.545
 margin = 0.06
 
 [node name="Marker3D" type="Marker3D" parent="Pivot/SpringArm3D"]
 
 [node name="CameraRoot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50168, 0)
 script = ExtResource("2_cdqoc")
 
 [node name="Camera3D" type="Camera3D" parent="CameraRoot"]
+fov = 90.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("2_gte4c")
@@ -46,3 +89,10 @@ offset_right = 111.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 43
 text = "Collectables: 0"
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../CollisionShape3D/Target/Mr_ Mackinley")
+tree_root = SubResource("AnimationNodeBlendTree_2h164")
+anim_player = NodePath("../CollisionShape3D/Target/Mr_ Mackinley/AnimationPlayer")
+
+[editable path="CollisionShape3D/Target/Mr_ Mackinley"]

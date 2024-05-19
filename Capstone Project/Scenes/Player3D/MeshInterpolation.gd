@@ -6,7 +6,6 @@ var update = false
 var previousFrame : Transform3D
 var currentFrame : Transform3D
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Seperates this nodes transforms from it's parent.

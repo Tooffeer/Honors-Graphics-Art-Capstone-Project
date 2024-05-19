@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=3 uid="uid://t1fxqyckyofj"]
+
+[ext_resource type="Script" path="res://Scenes/Player3D/player_3d.gd" id="1_ig6b7"]
+[ext_resource type="PackedScene" uid="uid://bafwjp4drnroy" path="res://Assets/Blender Files/Mr. Mackinley/Mr. Mackinley.blend" id="2_c6oc5"]
+[ext_resource type="Script" path="res://Scenes/Player3D/CameraInterpolation.gd" id="2_cdqoc"]
+[ext_resource type="Script" path="res://Scenes/Player3D/CanvasLayer.gd" id="2_gte4c"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bsjdu"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2h164"]
+
+[node name="Player3D" type="CharacterBody3D" groups=["player"]]
+collision_layer = 2
+script = ExtResource("1_ig6b7")
+verCamSensitivity = 0.042
+moveSpeed = 8.205
+accel = 22.22
+deaccel = 9.115
+airAccel = 5.26
+airDeaccel = 0.39
+jumpHeight = 2.335
+timeToPeak = 0.35
+timeToFall = 0.31
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("CylinderShape3D_bsjdu")
+
+[node name="Mr_ Mackinley" parent="CollisionShape3D" instance=ExtResource("2_c6oc5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+
+[node name="Skeleton3D" parent="CollisionShape3D/Mr_ Mackinley/Armature" index="0"]
+bones/0/rotation = Quaternion(-0.0854953, -1.18773e-07, 1.01918e-08, 0.996339)
+bones/1/rotation = Quaternion(0.278005, -1.75679e-14, -6.62816e-08, 0.96058)
+bones/2/rotation = Quaternion(0.72766, -1.6354e-07, -3.46975e-07, 0.685938)
+bones/4/rotation = Quaternion(-0.0252422, -0.0103226, 0.279769, 0.95968)
+bones/5/rotation = Quaternion(0.0117692, 0.00223358, 0.0146361, 0.999821)
+bones/7/rotation = Quaternion(-0.0252422, 0.0103226, -0.279769, 0.95968)
+bones/8/rotation = Quaternion(0.0117692, -0.00223356, -0.014636, 0.999821)
+bones/9/rotation = Quaternion(0.549441, 0.338559, 0.670195, -0.366511)
+bones/10/rotation = Quaternion(0.135038, 0.00248377, -0.675943, 0.724472)
+bones/11/rotation = Quaternion(-0.029214, 0.000364638, 0.0099164, 0.999524)
+bones/12/rotation = Quaternion(-0.549441, 0.338559, 0.670195, 0.366511)
+bones/13/rotation = Quaternion(0.135038, -0.00248377, 0.675943, 0.724472)
+bones/14/rotation = Quaternion(-0.029214, -0.000364638, -0.0099164, 0.999524)
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50168, 0)
+spring_length = 5.5
+margin = 0.06
+
+[node name="Marker3D" type="Marker3D" parent="Pivot/SpringArm3D"]
+
+[node name="CameraRoot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50168, 0)
+script = ExtResource("2_cdqoc")
+
+[node name="Camera3D" type="Camera3D" parent="CameraRoot"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("2_gte4c")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 111.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 43
+text = "Collectables: 0"
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../CollisionShape3D/Mr_ Mackinley")
+tree_root = SubResource("AnimationNodeBlendTree_2h164")
+anim_player = NodePath("../CollisionShape3D/Mr_ Mackinley/AnimationPlayer")
+
+[editable path="CollisionShape3D/Mr_ Mackinley"]
