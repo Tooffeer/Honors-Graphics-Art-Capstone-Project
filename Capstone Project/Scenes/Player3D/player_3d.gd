@@ -3,6 +3,12 @@ extends CharacterBody3D
 @onready var pivot = $Pivot
 @onready var spring_arm_3d = $Pivot/SpringArm3D
 @onready var model = $CollisionShape3D/Target
+@onready var animation_tree = $AnimationTree
+
+
+enum {IDLE, RUN}
+var curAnim = IDLE
+var value = 0
 
 # Camera variables
 @export var verCamSensitivity : float  = 0.04
@@ -35,6 +41,8 @@ func _physics_process(delta):
 	var input_axis = Input.get_vector("Left", "Right", "Forward", "Backward")
 	var direction = (pivot.basis * Vector3(input_axis.x, 0, input_axis.y)).normalized()
 	
+	
+	print (input_axis)
 	# Determine which accceleration to use
 	if is_on_floor():
 		ACCEL = accel
@@ -49,11 +57,13 @@ func _physics_process(delta):
 	if direction:
 		velocity.x = direction.x * moveSpeed
 		velocity.z = direction.z * moveSpeed
+		curAnim = RUN
 		#velocity.x += direction.x * ACCEL * delta
 		#velocity.z += direction.z * ACCEL * delta
 	else:
 		velocity.x = move_toward(velocity.x, 0, 1)
 		velocity.z = move_toward(velocity.z, 0, 1)
+		curAnim = IDLE
 		#velocity.x -= velocity.x * DEACCEL * delta
 		#velocity.z -= velocity.z * DEACCEL * delta
 	
@@ -64,6 +74,14 @@ func _physics_process(delta):
 	jump(delta, direction)
 	
 	move_and_slide()
+	
+	match curAnim:
+		IDLE:
+			value = lerpf(value, 0, 15 * delta)
+		RUN:
+			value = lerpf(value, 1, 15 * delta)
+	
+	animation()
 	model.rotation.y = atan2(velocity.x, velocity.z)
 
 # Camera rotation
@@ -106,3 +124,6 @@ func getGravity(jumpGravity, fallGravity):
 		return jumpGravity
 	else:
 		return fallGravity
+
+func animation():
+	animation_tree["parameters/Blend2/blend_amount"] = value
