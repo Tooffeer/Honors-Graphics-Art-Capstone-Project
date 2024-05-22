@@ -32,17 +32,17 @@ var coyoteTimer : float = 0.0
 var canJump : bool = true
 
 func _ready():
+	# Set reference to global
 	Global.setPlayerNode(self)
+	# Capture mouse
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 # Runs every physics frame
 func _physics_process(delta):
 	# Get input and direction based off camera
 	var input_axis = Input.get_vector("Left", "Right", "Forward", "Backward")
-	var direction = (pivot.basis * Vector3(input_axis.x, 0, input_axis.y)).normalized()
+	var direction = (pivot.basis * Vector3(input_axis.x, 0, input_axis.y))
 	
-	
-	print (input_axis)
 	# Determine which accceleration to use
 	if is_on_floor():
 		ACCEL = accel
@@ -51,15 +51,19 @@ func _physics_process(delta):
 		ACCEL = airAccel
 		DEACCEL = airDeaccel
 	
-	camera()
+	
 	
 	# Vertical movement
 	if direction:
 		velocity.x = direction.x * moveSpeed
 		velocity.z = direction.z * moveSpeed
+		
+		
+		
 		curAnim = RUN
 		#velocity.x += direction.x * ACCEL * delta
 		#velocity.z += direction.z * ACCEL * delta
+		model.rotation.y = atan2(velocity.x, velocity.z)
 	else:
 		velocity.x = move_toward(velocity.x, 0, 1)
 		velocity.z = move_toward(velocity.z, 0, 1)
@@ -68,21 +72,22 @@ func _physics_process(delta):
 		#velocity.z -= velocity.z * DEACCEL * delta
 	
 	# Limit velocity
-	#velocity.x = clamp(velocity.x, -moveSpeed, moveSpeed)
-	#velocity.z = clamp(velocity.z, -moveSpeed, moveSpeed)
+	velocity.x = clamp(velocity.x, -moveSpeed, moveSpeed)
+	velocity.z = clamp(velocity.z, -moveSpeed, moveSpeed)
 	
-	jump(delta, direction)
+	jump(delta)
 	
 	move_and_slide()
+	camera()
 	
+	# Testing animation
 	match curAnim:
 		IDLE:
 			value = lerpf(value, 0, 15 * delta)
 		RUN:
-			value = lerpf(value, 1, 15 * delta)
+			value = lerpf(value, 1 * direction.length(), 15 * delta)
 	
 	animation()
-	model.rotation.y = atan2(velocity.x, velocity.z)
 
 # Camera rotation
 func camera():
@@ -92,7 +97,7 @@ func camera():
 	spring_arm_3d.rotation.x = clamp(spring_arm_3d.rotation.x, deg_to_rad(-45), deg_to_rad(40))
 
 # "Building a Better Jump" - J. Kyle Pittman
-func jump(delta, direction):
+func jump(delta):
 	var jumpVelocity : float = (2.0 * jumpHeight) / timeToPeak
 	var jumpGravity : float = -(2.0 * jumpHeight) / pow(timeToPeak, 2.0)
 	var fallGravity : float = -(2.0 * jumpHeight) / pow(timeToFall, 2.0)

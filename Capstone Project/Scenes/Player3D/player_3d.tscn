@@ -6,8 +6,9 @@
 [ext_resource type="Script" path="res://Scenes/Player3D/CanvasLayer.gd" id="2_gte4c"]
 [ext_resource type="Script" path="res://Scenes/Player3D/MeshInterpolation.gd" id="3_q11yk"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_bsjdu"]
-radius = 0.720994
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_62v37"]
+height = 1.74385
+radius = 0.669492
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_yelxi"]
 
@@ -18,68 +19,57 @@ animation = &"Idle"
 animation = &"Run"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2h164"]
-graph_offset = Vector2(-328.967, -17.4809)
+graph_offset = Vector2(391.676, 296.042)
 nodes/Blend2/node = SubResource("AnimationNodeBlend2_yelxi")
-nodes/Blend2/position = Vector2(380, 100)
+nodes/Blend2/position = Vector2(440, 120)
 "nodes/Idle Animation/node" = SubResource("AnimationNodeAnimation_sl1dd")
-"nodes/Idle Animation/position" = Vector2(40, 120)
+"nodes/Idle Animation/position" = Vector2(220, 100)
 "nodes/Run Animation/node" = SubResource("AnimationNodeAnimation_b8jfr")
-"nodes/Run Animation/position" = Vector2(100, 280)
-nodes/output/position = Vector2(740, 160)
+"nodes/Run Animation/position" = Vector2(220, 230)
+nodes/output/position = Vector2(620, 170)
 node_connections = [&"Blend2", 0, &"Idle Animation", &"Blend2", 1, &"Run Animation", &"output", 0, &"Blend2"]
 
 [node name="Player3D" type="CharacterBody3D" groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_ig6b7")
 verCamSensitivity = 0.042
-moveSpeed = 14.355
-accel = 22.22
+moveSpeed = 14.0
+accel = 75.0
 deaccel = 9.115
 airAccel = 5.26
 airDeaccel = 0.39
-jumpHeight = 2.335
-timeToPeak = 0.35
-timeToFall = 0.31
+jumpHeight = 4.25
+timeToFall = 0.3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-shape = SubResource("CylinderShape3D_bsjdu")
+shape = SubResource("CylinderShape3D_62v37")
 
 [node name="Target" type="Node3D" parent="CollisionShape3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.168339, 0)
 
 [node name="Mr_ Mackinley" parent="CollisionShape3D/Target" instance=ExtResource("2_c6oc5")]
 script = ExtResource("3_q11yk")
 
 [node name="Skeleton3D" parent="CollisionShape3D/Target/Mr_ Mackinley/Armature" index="0"]
-bones/0/position = Vector3(-4.23898e-08, 0.396414, -0.0647407)
-bones/0/rotation = Quaternion(0.043114, -1.19442e-07, 6.04683e-08, 0.99907)
-bones/1/rotation = Quaternion(0.135937, 0.126474, 0.00331976, 0.982606)
-bones/2/rotation = Quaternion(0.730386, -0.0357253, 0.0573171, 0.679687)
+bones/0/rotation = Quaternion(-0.111595, -0.000233797, -0.00133866, 0.993753)
+bones/1/rotation = Quaternion(0.310613, -0.000103627, -3.17388e-05, 0.950536)
+bones/2/rotation = Quaternion(0.692427, 0.0109845, 0.00781832, 0.721362)
 bones/3/rotation = Quaternion(-0.202972, 0.0512208, -0.44727, 0.869556)
 bones/3/scale = Vector3(1, 1, 1)
-bones/4/rotation = Quaternion(-0.273633, -0.202391, 0.297542, 0.891982)
 bones/4/scale = Vector3(1, 1, 1)
-bones/5/rotation = Quaternion(-0.00662441, -0.120979, -0.18232, 0.975746)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/rotation = Quaternion(-0.202972, -0.0512206, 0.44727, 0.869556)
-bones/7/rotation = Quaternion(-0.219427, 0.147388, -0.203299, 0.942761)
 bones/7/scale = Vector3(1, 1, 1)
-bones/8/rotation = Quaternion(-0.0359321, -0.101957, -0.0169974, 0.993994)
+bones/8/rotation = Quaternion(0.0117692, -0.00223356, -0.014636, 0.999821)
 bones/8/scale = Vector3(1, 1, 1)
-bones/9/position = Vector3(-5.34133e-09, 0.396414, -0.0647408)
-bones/9/rotation = Quaternion(0.510536, 0.492674, 0.685793, -0.162216)
+bones/9/rotation = Quaternion(0.549441, 0.338559, 0.670195, -0.366511)
 bones/9/scale = Vector3(1, 1, 1)
-bones/10/rotation = Quaternion(0.0842106, 0.0877856, -0.394407, 0.910849)
-bones/11/rotation = Quaternion(0.385347, -0.0763059, -0.215885, 0.893912)
-bones/12/position = Vector3(5.34133e-09, 0.396414, -0.0647408)
-bones/12/rotation = Quaternion(-0.2111, -0.285682, 0.691661, 0.62883)
+bones/10/rotation = Quaternion(0.135038, 0.00248378, -0.675943, 0.724472)
 bones/12/scale = Vector3(1, 1, 1)
-bones/13/rotation = Quaternion(-0.0222604, -0.146241, 0.542428, 0.826977)
-bones/14/rotation = Quaternion(0.0950232, 0.00118437, 0.0322676, 0.994951)
+bones/13/rotation = Quaternion(0.135038, -0.00248378, 0.675943, 0.724472)
 
 [node name="Pivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.77944, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.4, 2.08165e-12)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="Pivot"]
 spring_length = 6.545
@@ -106,6 +96,6 @@ text = "Collectables: 0"
 root_node = NodePath("../CollisionShape3D/Target/Mr_ Mackinley")
 tree_root = SubResource("AnimationNodeBlendTree_2h164")
 anim_player = NodePath("../CollisionShape3D/Target/Mr_ Mackinley/AnimationPlayer")
-parameters/Blend2/blend_amount = 1.0
+parameters/Blend2/blend_amount = 0.0
 
 [editable path="CollisionShape3D/Target/Mr_ Mackinley"]
