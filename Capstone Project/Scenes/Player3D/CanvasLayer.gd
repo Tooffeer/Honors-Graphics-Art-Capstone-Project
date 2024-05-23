@@ -10,4 +10,5 @@ func _process(delta):
 	updateInfo()
 
 func updateInfo():
-	label.text = "Collectables: " + str(Global.collectables)
+	#label.text = "Collectables: " + str(Global.collectables)
+	pass

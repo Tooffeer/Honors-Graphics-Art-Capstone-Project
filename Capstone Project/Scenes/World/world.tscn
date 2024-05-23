@@ -1,14 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://ciaptb12k2hni"]
+[gd_scene load_steps=16 format=3 uid="uid://ciaptb12k2hni"]
 
 [ext_resource type="PackedScene" uid="uid://y0qwee3fait1" path="res://Scenes/Collectable/collectable.tscn" id="1_5qeyd"]
 [ext_resource type="Material" uid="uid://d2n08ne63crf0" path="res://Assets/Materials/TileMaterial.tres" id="1_scoum"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_dc4ie"]
-size = Vector3(100, 1, 100)
-
-[sub_resource type="BoxMesh" id="BoxMesh_5j8oc"]
-material = ExtResource("1_scoum")
-size = Vector3(100, 1, 100)
+[ext_resource type="Material" uid="uid://b2wsukb31fjk6" path="res://Assets/Materials/Brick(Bolts).tres" id="2_dgmux"]
+[ext_resource type="Material" uid="uid://j3amdj3pnl3x" path="res://Assets/Materials/Grass.tres" id="2_ilc55"]
+[ext_resource type="Material" uid="uid://dsw1480vqjntc" path="res://Assets/Materials/Brick.tres" id="3_uj13y"]
+[ext_resource type="Material" uid="uid://capyuxrxv48fk" path="res://Assets/Materials/Lockers.tres" id="6_h75k4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_omtrg"]
 sky_top_color = Color(0.381814, 0.574231, 0.783429, 1)
@@ -21,12 +18,12 @@ sky_material = SubResource("ProceduralSkyMaterial_omtrg")
 background_mode = 2
 sky = SubResource("Sky_4u3ca")
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_i22l7"]
-points = PackedVector3Array(-2, -2, -2, -2, -2, 2, 2, 2, -2, 2, 2, 2, 2, -2, -2, 2, -2, 2)
+[sub_resource type="BoxShape3D" id="BoxShape3D_dc4ie"]
+size = Vector3(100, 1, 100)
 
-[sub_resource type="PrismMesh" id="PrismMesh_5e3aj"]
-left_to_right = 1.0
-size = Vector3(4, 4, 4)
+[sub_resource type="BoxMesh" id="BoxMesh_5j8oc"]
+material = ExtResource("1_scoum")
+size = Vector3(100, 1, 100)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2f4ug"]
 size = Vector3(4, 4, 4)
@@ -34,7 +31,34 @@ size = Vector3(4, 4, 4)
 [sub_resource type="BoxMesh" id="BoxMesh_tvrws"]
 size = Vector3(4, 4, 4)
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_o5vl3"]
+points = PackedVector3Array(-2, 2.05, 2, -2, 2.05, -2, -2, -2, -2, -2, -2, 2, 2, -2, 2, 2, -2, -2)
+
+[sub_resource type="PrismMesh" id="PrismMesh_n41nd"]
+left_to_right = 1.11022e-16
+size = Vector3(4, 4, 4)
+
 [node name="World" type="Node3D"]
+
+[node name="Items" type="Node" parent="."]
+
+[node name="Collectable" parent="Items" instance=ExtResource("1_5qeyd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.06692, -10.8818)
+
+[node name="Collectable2" parent="Items" instance=ExtResource("1_5qeyd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.13383, 8.092)
+
+[node name="Collectable3" parent="Items" instance=ExtResource("1_5qeyd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.13486, 1.06692, -5.88177)
+
+[node name="Lighting" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(0.866026, 0.433013, -0.25, -3.55507e-09, 0.5, 0.866025, 0.5, -0.75, 0.433013, 0, 10, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
+environment = SubResource("Environment_j15kw")
 
 [node name="Floor" type="StaticBody3D" parent="."]
 
@@ -43,33 +67,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_dc4ie")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor/CollisionShape3D"]
+material_override = ExtResource("2_ilc55")
 mesh = SubResource("BoxMesh_5j8oc")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 10, 0)
-shadow_enabled = true
+[node name="SimpleCube3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, -10)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_j15kw")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SimpleCube3"]
+shape = SubResource("BoxShape3D_2f4ug")
 
-[node name="Collectable" parent="." instance=ExtResource("1_5qeyd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06692, -5.88177)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SimpleCube3/CollisionShape3D"]
+material_override = ExtResource("3_uj13y")
+mesh = SubResource("BoxMesh_tvrws")
 
-[node name="Collectable2" parent="." instance=ExtResource("1_5qeyd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.13383, 8.092)
+[node name="SimpleCube2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 6, -10)
 
-[node name="Collectable3" parent="." instance=ExtResource("1_5qeyd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.13486, 1.06692, -5.88177)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SimpleCube2"]
+shape = SubResource("BoxShape3D_2f4ug")
 
-[node name="Ramp" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, -10)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp"]
-shape = SubResource("ConvexPolygonShape3D_i22l7")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ramp/CollisionShape3D"]
-material_override = ExtResource("1_scoum")
-mesh = SubResource("PrismMesh_5e3aj")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SimpleCube2/CollisionShape3D"]
+material_override = ExtResource("2_dgmux")
+mesh = SubResource("BoxMesh_tvrws")
 
 [node name="SimpleCube" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, -10)
@@ -80,3 +99,23 @@ shape = SubResource("BoxShape3D_2f4ug")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SimpleCube/CollisionShape3D"]
 material_override = ExtResource("1_scoum")
 mesh = SubResource("BoxMesh_tvrws")
+
+[node name="SimpleCube4" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, -6)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SimpleCube4"]
+shape = SubResource("BoxShape3D_2f4ug")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SimpleCube4/CollisionShape3D"]
+material_override = ExtResource("6_h75k4")
+mesh = SubResource("BoxMesh_tvrws")
+
+[node name="Slope" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 2, -6)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Slope"]
+shape = SubResource("ConvexPolygonShape3D_o5vl3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Slope/CollisionShape3D"]
+material_override = ExtResource("1_scoum")
+mesh = SubResource("PrismMesh_n41nd")

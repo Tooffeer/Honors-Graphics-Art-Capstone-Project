@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://capyuxrxv48fk"]
+
+[ext_resource type="Texture2D" uid="uid://i35t1n0xhte8" path="res://Assets/Textures/Lockers.png" id="1_fs30i"]
+
+[resource]
+albedo_texture = ExtResource("1_fs30i")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 2.00001
+uv1_world_triplanar = true
+texture_filter = 2
