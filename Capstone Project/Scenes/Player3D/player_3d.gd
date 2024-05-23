@@ -31,7 +31,6 @@ enum {IDLE, RUN}
 var curAnim = IDLE
 var value = 0
 
-
 func _ready():
 	# Set reference to global
 	Global.setPlayerNode(self)
@@ -39,15 +38,13 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta):
-	# Need to fix this crap
+	# Need to fix everything here
 	
 	
 	# Get input and direction based off of camera
 	var input_axis = Input.get_vector("Left", "Right", "Forward", "Backward")
 	var direction = (pivot.basis * Vector3(input_axis.x, 0, input_axis.y))
 	
-	print(input_axis.normalized())
-	print(direction.normalized())
 	# Determine accceleration
 	if is_on_floor():
 		ACCEL = accel
@@ -81,13 +78,6 @@ func _physics_process(delta):
 	if test.length() >= moveSpeed:
 		velocity.x = velocity.normalized().x * moveSpeed
 		velocity.z = velocity.normalized().z * moveSpeed
-	
-	print(velocity.length())
-	
-	
-	
-	
-	
 	
 	jump(delta)
 	
