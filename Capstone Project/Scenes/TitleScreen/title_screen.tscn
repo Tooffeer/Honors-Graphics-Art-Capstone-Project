@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://csbipluxt5wgp"]
+[gd_scene load_steps=3 format=3 uid="uid://csbipluxt5wgp"]
 
 [ext_resource type="Script" path="res://Scenes/TitleScreen/title_screen.gd" id="1_cij7l"]
+
+[sub_resource type="Theme" id="Theme_1ovww"]
+/colors/bi = Color(0.344712, 0.919957, 0.801309, 1)
+Button/constants/h_separation = 48
+Button/constants/icon_max_width = 27
+Button/constants/outline_size = -11
+Button/font_sizes/font_size = 65
+TextEdit/font_sizes/font_size = 44
+VBoxContainer/constants/separation = 87
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -27,13 +36,15 @@ grow_vertical = 2
 
 [node name="Start" type="Button" parent="Options"]
 layout_mode = 2
+theme = SubResource("Theme_1ovww")
 theme_override_font_sizes/font_size = 37
 text = "Start"
 
-[node name="Settings" type="Button" parent="Options"]
+[node name="Fullscreen" type="CheckButton" parent="Options"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 37
-text = "Settings"
+text = "Fullscreeen
+"
 
 [node name="Quit" type="Button" parent="Options"]
 layout_mode = 2
