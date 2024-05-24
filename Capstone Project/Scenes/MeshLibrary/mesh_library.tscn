@@ -1,0 +1,85 @@
+[gd_scene load_steps=12 format=3 uid="uid://c1o8c5md3supj"]
+
+[ext_resource type="Material" uid="uid://j3amdj3pnl3x" path="res://Assets/Materials/Grass.tres" id="1_g32do"]
+[ext_resource type="Material" uid="uid://dsw1480vqjntc" path="res://Assets/Materials/Brick.tres" id="2_ag4ha"]
+[ext_resource type="Material" uid="uid://b2wsukb31fjk6" path="res://Assets/Materials/Brick(Bolts).tres" id="3_d30x1"]
+[ext_resource type="Material" uid="uid://capyuxrxv48fk" path="res://Assets/Materials/Lockers.tres" id="4_ra71o"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_atkw1"]
+material = ExtResource("1_g32do")
+size = Vector3(4, 4, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ih85v"]
+size = Vector3(4, 4, 4)
+
+[sub_resource type="PrismMesh" id="PrismMesh_01stk"]
+material = ExtResource("1_g32do")
+left_to_right = 1.11022e-16
+size = Vector3(4, 4, 4)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jgubt"]
+points = PackedVector3Array(-2, 2.05, 2, -2, 2.05, -2, -2, -2, -2, -2, -2, 2, 2, -2, 2, 2, -2, -2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_luhqw"]
+material = ExtResource("2_ag4ha")
+size = Vector3(4, 4, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_inlsg"]
+material = ExtResource("3_d30x1")
+size = Vector3(4, 4, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8bxyu"]
+material = ExtResource("4_ra71o")
+size = Vector3(4, 4, 4)
+
+[node name="MeshLibrary" type="Node3D"]
+
+[node name="Grass" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, 2)
+mesh = SubResource("BoxMesh_atkw1")
+skeleton = NodePath("SimpleCube/CollisionShape3D")
+
+[node name="SimpleCube" type="StaticBody3D" parent="Grass"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grass/SimpleCube"]
+shape = SubResource("BoxShape3D_ih85v")
+
+[node name="GrassSlope" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 2, 6)
+mesh = SubResource("PrismMesh_01stk")
+skeleton = NodePath("Slope/CollisionShape3D")
+
+[node name="Slope" type="StaticBody3D" parent="GrassSlope"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrassSlope/Slope"]
+shape = SubResource("ConvexPolygonShape3D_jgubt")
+
+[node name="Brick" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, 2)
+mesh = SubResource("BoxMesh_luhqw")
+skeleton = NodePath("SimpleCube3/CollisionShape3D")
+
+[node name="SimpleCube3" type="StaticBody3D" parent="Brick"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Brick/SimpleCube3"]
+shape = SubResource("BoxShape3D_ih85v")
+
+[node name="Brick(Bolts)" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, 6)
+mesh = SubResource("BoxMesh_inlsg")
+skeleton = NodePath("SimpleCube2/CollisionShape3D")
+
+[node name="SimpleCube2" type="StaticBody3D" parent="Brick(Bolts)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Brick(Bolts)/SimpleCube2"]
+shape = SubResource("BoxShape3D_ih85v")
+
+[node name="Locker" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2, 2)
+mesh = SubResource("BoxMesh_8bxyu")
+skeleton = NodePath("../Brick/SimpleCube3/CollisionShape3D")
+
+[node name="SimpleCube3" type="StaticBody3D" parent="Locker"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Locker/SimpleCube3"]
+shape = SubResource("BoxShape3D_ih85v")
