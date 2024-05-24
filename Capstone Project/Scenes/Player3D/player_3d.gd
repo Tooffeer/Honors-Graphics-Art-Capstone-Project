@@ -66,23 +66,22 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, direction.x, moveSpeed)
 		velocity.z = move_toward(velocity.z, direction.z, moveSpeed)
 		
-		velocity.x -= velocity.x * DEACCEL * delta
-		velocity.z -= velocity.z * DEACCEL * delta
+		#velocity.x -= velocity.x * DEACCEL * delta
+		#velocity.z -= velocity.z * DEACCEL * delta
 		curAnim = IDLE
 	
 	
 	velocity.x = clamp(velocity.x, -moveSpeed, moveSpeed)
 	velocity.z = clamp(velocity.z, -moveSpeed, moveSpeed)
-	
 	var test = Vector2(velocity.x, velocity.z)
 	if test.length() >= moveSpeed:
 		velocity.x = velocity.normalized().x * moveSpeed
 		velocity.z = velocity.normalized().z * moveSpeed
 	
 	jump(delta)
-	
-	move_and_slide()
 	camera()
+	move_and_slide()
+	
 	
 	# Testing animation
 	match curAnim:
@@ -97,7 +96,22 @@ func camera():
 	var input_axis = Input.get_vector("Camera Right", "Camera Left", "Camera Down", "Camera Up")
 	pivot.rotate_y(input_axis.x * horCamSensitivity)
 	spring_arm_3d.rotate_x(input_axis.y * verCamSensitivity)
-	spring_arm_3d.rotation.x = clamp(spring_arm_3d.rotation.x, deg_to_rad(-45), deg_to_rad(40))
+	spring_arm_3d.rotation.x = clamp(spring_arm_3d.rotation.x, deg_to_rad(-70), deg_to_rad(40))
+	
+	#pivot.top_level = true
+	#var cam_offset = 2.4
+	#
+	#pivot.position.x = position.x
+	#pivot.position.z = position.z
+	#
+	#var vertical_distance = position.y - pivot.position.y
+	#print(vertical_distance)
+	#
+	##if vertical_distance > 0
+	#
+	#if is_on_floor() or vertical_distance <= -5 or vertical_distance >= 4.5:
+		#pivot.position.y = lerp(pivot.position.y, position.y + cam_offset, 0.2)
+	
 
 func jump(delta):
 	# "Building a Better Jump" - J. Kyle Pittman
