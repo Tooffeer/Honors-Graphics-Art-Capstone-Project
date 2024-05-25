@@ -16,4 +16,4 @@ func _process(_delta):
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	
-	print(DisplayServer.window_get_size())
+	#print(DisplayServer.window_get_size())
