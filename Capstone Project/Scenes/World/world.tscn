@@ -1,14 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://ciaptb12k2hni"]
+[gd_scene load_steps=6 format=3 uid="uid://ciaptb12k2hni"]
 
 [ext_resource type="PackedScene" uid="uid://y0qwee3fait1" path="res://Scenes/Collectable/collectable.tscn" id="1_5qeyd"]
-[ext_resource type="Texture2D" uid="uid://dmf0rdmihl8dm" path="res://Assets/Textures/Backyard Skybox.jpg" id="2_l664v"]
 [ext_resource type="MeshLibrary" uid="uid://cfj00sw6k4vcy" path="res://Assets/Library.tres" id="7_dly5a"]
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_sv73s"]
-panorama = ExtResource("2_l664v")
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ntwwt"]
 
 [sub_resource type="Sky" id="Sky_731w2"]
-sky_material = SubResource("PanoramaSkyMaterial_sv73s")
+sky_material = SubResource("ProceduralSkyMaterial_ntwwt")
 
 [sub_resource type="Environment" id="Environment_vkfre"]
 background_mode = 2
