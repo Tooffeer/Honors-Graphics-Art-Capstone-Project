@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://t1fxqyckyofj"]
+[gd_scene load_steps=13 format=3 uid="uid://t1fxqyckyofj"]
 
 [ext_resource type="Script" path="res://Scenes/Player3D/player_3d.gd" id="1_ig6b7"]
 [ext_resource type="PackedScene" uid="uid://tx4gafcm2182" path="res://Assets/Blender/Mr. Mackinley/Mr. Mackinley.blend" id="2_c6oc5"]
@@ -11,34 +11,26 @@ margin = 0.008
 radius = 0.730595
 height = 1.68875
 
-[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_yelxi"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_xxvwa"]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hpq3j"]
-animation = &"Fall"
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_yelxi"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sl1dd"]
 animation = &"Idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n1qgp"]
-animation = &"Rising"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b8jfr"]
 animation = &"Run"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2h164"]
-graph_offset = Vector2(-81.6835, 62.9354)
+graph_offset = Vector2(-17.6794, 22.0754)
 nodes/Blend2/node = SubResource("AnimationNodeBlend2_yelxi")
 nodes/Blend2/position = Vector2(440, 110)
-nodes/Fall/node = SubResource("AnimationNodeAnimation_hpq3j")
-nodes/Fall/position = Vector2(660, 260)
-nodes/Idle/node = SubResource("AnimationNodeAnimation_sl1dd")
-nodes/Idle/position = Vector2(220, 100)
-nodes/Jump/node = SubResource("AnimationNodeAnimation_n1qgp")
-nodes/Jump/position = Vector2(780, 380)
-nodes/Run/node = SubResource("AnimationNodeAnimation_b8jfr")
-nodes/Run/position = Vector2(220, 230)
-nodes/output/position = Vector2(800, 120)
-node_connections = [&"Blend2", 0, &"Idle", &"Blend2", 1, &"Run", &"output", 0, &"Blend2"]
+"nodes/Idle Animation/node" = SubResource("AnimationNodeAnimation_sl1dd")
+"nodes/Idle Animation/position" = Vector2(220, 100)
+"nodes/Run Animation/node" = SubResource("AnimationNodeAnimation_b8jfr")
+"nodes/Run Animation/position" = Vector2(220, 230)
+nodes/output/position = Vector2(620, 170)
+node_connections = [&"Blend2", 0, &"Idle Animation", &"Blend2", 1, &"Run Animation", &"output", 0, &"Blend2"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_yhh1r"]
 radial_segments = 16
@@ -67,38 +59,38 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.144263, 0)
 script = ExtResource("3_q11yk")
 
 [node name="Skeleton3D" parent="CollisionShape3D/Target/Mr_ Mackinley/Armature" index="0"]
-bones/0/position = Vector3(-2.11792e-08, -0.0491754, -0.0647408)
-bones/0/rotation = Quaternion(0.0376653, -1.19434e-07, 3.96352e-08, 0.99929)
-bones/1/rotation = Quaternion(0.49305, 0.0155752, 0.000408716, 0.869861)
-bones/2/rotation = Quaternion(0.479161, -0.00439235, 0.00704652, 0.877688)
+bones/0/position = Vector3(-1.39167e-08, -0.130376, -0.0647408)
+bones/0/rotation = Quaternion(-0.0527639, -0.000290801, -0.00124023, 0.998606)
+bones/1/rotation = Quaternion(0.262782, 0.0425499, 0.00245206, 0.963914)
+bones/2/rotation = Quaternion(0.727334, -0.00900822, 0.0243753, 0.685792)
 bones/3/rotation = Quaternion(-0.202972, 0.0512208, -0.44727, 0.869556)
 bones/3/scale = Vector3(1, 1, 1)
-bones/4/rotation = Quaternion(-0.0464907, -0.0273435, 0.286883, 0.956446)
+bones/4/rotation = Quaternion(-0.102963, -0.070237, 0.29004, 0.948864)
 bones/4/scale = Vector3(1, 1, 1)
-bones/5/rotation = Quaternion(0.196972, 0.0473951, 0.047842, 0.978093)
+bones/5/rotation = Quaternion(0.013167, -0.0367921, -0.0440386, 0.998265)
 bones/5/scale = Vector3(1, 1, 1)
-bones/6/rotation = Quaternion(-0.202972, -0.0512206, 0.44727, 0.869556)
-bones/7/rotation = Quaternion(-0.0491186, 0.0271504, -0.271344, 0.960845)
+bones/7/rotation = Quaternion(-0.0845334, 0.052182, -0.256609, 0.961396)
 bones/7/scale = Vector3(1, 1, 1)
-bones/8/rotation = Quaternion(0.160504, -0.0641894, -0.0622846, 0.982975)
+bones/8/rotation = Quaternion(0.00764556, -0.0386498, -0.0186411, 0.99905)
 bones/8/scale = Vector3(1, 1, 1)
-bones/9/position = Vector3(-1.94914e-08, -0.0491753, -0.0647408)
-bones/9/rotation = Quaternion(0.285708, -0.0315793, 0.762923, -0.57907)
+bones/9/position = Vector3(5.34207e-09, -0.130376, -0.0647407)
+bones/9/rotation = Quaternion(0.548743, 0.405154, 0.671281, -0.290021)
 bones/9/scale = Vector3(1, 1, 1)
-bones/10/rotation = Quaternion(-0.035155, 0.155989, -0.566343, 0.808509)
-bones/11/rotation = Quaternion(0.592609, -0.0158582, -0.209353, 0.777647)
-bones/12/position = Vector3(1.94914e-08, -0.0491753, -0.0647408)
-bones/12/rotation = Quaternion(-0.516545, 0.257579, 0.699664, 0.421076)
+bones/10/rotation = Quaternion(0.113599, 0.035621, -0.594258, 0.795414)
+bones/11/rotation = Quaternion(0.0738182, -0.0234693, -0.0604436, 0.995162)
+bones/12/position = Vector3(-5.34207e-09, -0.130376, -0.0647407)
+bones/12/rotation = Quaternion(-0.451834, 0.110424, 0.730621, 0.499845)
 bones/12/scale = Vector3(1, 1, 1)
-bones/13/rotation = Quaternion(-0.0365198, -0.153785, 0.594549, 0.788371)
-bones/14/rotation = Quaternion(0.173801, 0.00216663, 0.0590163, 0.983008)
+bones/13/rotation = Quaternion(0.0883476, -0.0272658, 0.596944, 0.796937)
+bones/14/rotation = Quaternion(0.0562834, 0.00662073, 0.0132132, 0.998305)
 
 [node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.4, 2.08165e-12)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="Pivot"]
+shape = SubResource("SphereShape3D_xxvwa")
 spring_length = 6.545
-margin = 0.245
+margin = 0.06
 
 [node name="Marker3D" type="Marker3D" parent="Pivot/SpringArm3D"]
 
@@ -131,14 +123,12 @@ text = "X 20"
 root_node = NodePath("../CollisionShape3D/Target/Mr_ Mackinley")
 tree_root = SubResource("AnimationNodeBlendTree_2h164")
 anim_player = NodePath("../CollisionShape3D/Target/Mr_ Mackinley/AnimationPlayer")
-parameters/Blend2/blend_amount = 1.0
+parameters/Blend2/blend_amount = 0.35
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
 transform = Transform3D(1, -0.000378913, -0.000884764, 0.000379764, 1, 0.000962593, 0.000884399, -0.000962929, 0.999999, 0, 0, 0)
-visible = false
 lifetime = 1.5
 speed_scale = 2.42
-explosiveness = 0.07
 randomness = 1.0
 mesh = SubResource("SphereMesh_yhh1r")
 spread = 90.6

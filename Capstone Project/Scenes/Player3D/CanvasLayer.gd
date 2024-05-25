@@ -6,7 +6,7 @@ extends CanvasLayer
 func _ready():
 	updateInfo()
 
-func _process(delta):
+func _process(_delta):
 	updateInfo()
 
 func updateInfo():

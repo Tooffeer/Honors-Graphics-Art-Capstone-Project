@@ -1,20 +1,22 @@
-[gd_scene load_steps=10 format=3 uid="uid://ciaptb12k2hni"]
+[gd_scene load_steps=11 format=3 uid="uid://ciaptb12k2hni"]
 
 [ext_resource type="PackedScene" uid="uid://y0qwee3fait1" path="res://Scenes/Collectable/collectable.tscn" id="1_5qeyd"]
 [ext_resource type="Material" uid="uid://d2n08ne63crf0" path="res://Assets/Materials/TileMaterial.tres" id="1_scoum"]
 [ext_resource type="Material" uid="uid://j3amdj3pnl3x" path="res://Assets/Materials/Grass.tres" id="2_ilc55"]
+[ext_resource type="Texture2D" uid="uid://dmf0rdmihl8dm" path="res://Assets/Textures/Backyard Skybox.jpg" id="2_l664v"]
 [ext_resource type="MeshLibrary" uid="uid://cfj00sw6k4vcy" path="res://Assets/Library.tres" id="7_dly5a"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_omtrg"]
-sky_top_color = Color(0.381814, 0.574231, 0.783429, 1)
-sky_curve = 0.075
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_sv73s"]
+panorama = ExtResource("2_l664v")
 
-[sub_resource type="Sky" id="Sky_4u3ca"]
-sky_material = SubResource("ProceduralSkyMaterial_omtrg")
+[sub_resource type="Sky" id="Sky_731w2"]
+sky_material = SubResource("PanoramaSkyMaterial_sv73s")
 
-[sub_resource type="Environment" id="Environment_j15kw"]
+[sub_resource type="Environment" id="Environment_vkfre"]
 background_mode = 2
-sky = SubResource("Sky_4u3ca")
+sky = SubResource("Sky_731w2")
+sky_rotation = Vector3(3.48787e-16, -2.05425, 3.48787e-16)
+ambient_light_source = 3
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dc4ie"]
 size = Vector3(100, 1, 100)
@@ -38,12 +40,6 @@ metadata/_editor_floor_ = Vector3(0, 2, 0)
 [node name="Collectable" parent="Items" instance=ExtResource("1_5qeyd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.06692, -10.8818)
 
-[node name="Collectable2" parent="Items" instance=ExtResource("1_5qeyd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.13383, 8.092)
-
-[node name="Collectable3" parent="Items" instance=ExtResource("1_5qeyd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.13486, 1.06692, -5.88177)
-
 [node name="Lighting" type="Node" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting"]
@@ -51,7 +47,7 @@ transform = Transform3D(0.841039, -0.450589, -0.299371, 1.33595e-08, -0.553392, 
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
-environment = SubResource("Environment_j15kw")
+environment = SubResource("Environment_vkfre")
 
 [node name="Floor" type="StaticBody3D" parent="."]
 visible = false
