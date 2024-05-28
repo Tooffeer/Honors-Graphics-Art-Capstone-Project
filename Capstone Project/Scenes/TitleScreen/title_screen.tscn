@@ -71,4 +71,5 @@ offset_bottom = 102.0
 text = "Brennan Castillo, P2"
 
 [connection signal="pressed" from="Options/Start" to="." method="_on_start_pressed"]
+[connection signal="toggled" from="Options/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="pressed" from="Options/Quit" to="." method="_on_quit_pressed"]
