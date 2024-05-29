@@ -1,10 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://t1fxqyckyofj"]
+[gd_scene load_steps=21 format=3 uid="uid://t1fxqyckyofj"]
 
 [ext_resource type="Script" path="res://Scenes/Player3D/player_3d.gd" id="1_ig6b7"]
 [ext_resource type="PackedScene" uid="uid://tx4gafcm2182" path="res://Assets/Blender/Mr. Mackinley/Mr. Mackinley.blend" id="2_c6oc5"]
 [ext_resource type="Script" path="res://Scenes/Player3D/CameraInterpolation.gd" id="2_cdqoc"]
 [ext_resource type="Script" path="res://Scenes/Player3D/CanvasLayer.gd" id="2_gte4c"]
 [ext_resource type="Script" path="res://Scenes/Player3D/MeshInterpolation.gd" id="3_q11yk"]
+[ext_resource type="Texture2D" uid="uid://b8q71dir0phh6" path="res://Assets/Textures/Dust Frames/Dust6.png" id="6_vu5k3"]
+[ext_resource type="Texture2D" uid="uid://b225sthj6dbon" path="res://Assets/Textures/Dust Frames/Dust1.png" id="7_iwqq3"]
+[ext_resource type="Texture2D" uid="uid://13c8wvtl8r7s" path="res://Assets/Textures/Dust Frames/Dust2.png" id="8_mjfmj"]
+[ext_resource type="Texture2D" uid="uid://csf2a33d5fh4i" path="res://Assets/Textures/Dust Frames/Dust3.png" id="9_1q7a2"]
+[ext_resource type="Texture2D" uid="uid://c4jk5qn36vm62" path="res://Assets/Textures/Dust Frames/Dust4.png" id="10_h1jtc"]
+[ext_resource type="Texture2D" uid="uid://ts3hjwc7j4vd" path="res://Assets/Textures/Dust Frames/Dust5.png" id="11_wtkwc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qo1ih"]
 margin = 0.008
@@ -31,21 +37,49 @@ nodes/Blend2/position = Vector2(440, 110)
 nodes/output/position = Vector2(620, 170)
 node_connections = [&"Blend2", 0, &"Idle Animation", &"Blend2", 1, &"Run Animation", &"output", 0, &"Blend2"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_yhh1r"]
-radial_segments = 16
-rings = 8
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_xg8df"]
+frames = 6
+frame_0/texture = ExtResource("6_vu5k3")
+frame_0/duration = 0.1
+frame_1/texture = ExtResource("7_iwqq3")
+frame_1/duration = 0.1
+frame_2/texture = ExtResource("8_mjfmj")
+frame_2/duration = 0.1
+frame_3/texture = ExtResource("9_1q7a2")
+frame_3/duration = 0.1
+frame_4/texture = ExtResource("10_h1jtc")
+frame_4/duration = 0.1
+frame_5/texture = ExtResource("11_wtkwc")
+frame_5/duration = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gu6cs"]
+transparency = 1
+shading_mode = 0
+diffuse_mode = 3
+albedo_texture = SubResource("AnimatedTexture_xg8df")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_w05ve"]
+material = SubResource("StandardMaterial3D_gu6cs")
+size = Vector2(0.7, 0.7)
+orientation = 2
 
 [node name="Player3D" type="CharacterBody3D" groups=["player"]]
 collision_layer = 2
 floor_constant_speed = true
 floor_snap_length = 0.3
 script = ExtResource("1_ig6b7")
-moveSpeed = 14.75
-accel = 24.0
-airAccel = 6.0
-airDeaccel = 1.07
+moveSpeed = 15.0
+accel = 41.0
+deaccel = 21.0
+airAccel = 30.0
+airDeaccel = 15.0
 jumpHeight = 4.6
-timeToPeak = 0.39
+timeToPeak = 0.37
+timeToFall = 0.31
 verCamSensitivity = 0.042
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -58,31 +92,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.144263, 0)
 script = ExtResource("3_q11yk")
 
 [node name="Skeleton3D" parent="CollisionShape3D/Target/Mr_ Mackinley/Armature" index="0"]
-bones/0/position = Vector3(-1.61249e-09, -0.350217, -0.0647407)
-bones/0/rotation = Quaternion(-0.208165, -0.00118128, -0.00656951, 0.978071)
-bones/1/rotation = Quaternion(0.431457, 0.00401318, 0.000733777, 0.902124)
-bones/2/rotation = Quaternion(0.749337, 0.00882461, 0.0153202, 0.661953)
-bones/3/rotation = Quaternion(-0.202972, 0.0512208, -0.44727, 0.869556)
+bones/0/position = Vector3(-8.36756e-09, -0.0753828, -0.0647407)
+bones/0/rotation = Quaternion(0.17302, -1.14829e-07, 3.15715e-08, 0.984918)
+bones/1/rotation = Quaternion(0.311261, -0.0259371, -0.000680871, 0.94997)
+bones/2/rotation = Quaternion(0.486706, 0.00451023, -0.0092692, 0.873505)
 bones/3/scale = Vector3(1, 1, 1)
-bones/4/rotation = Quaternion(-0.0343438, -0.0173466, 0.280947, 0.958952)
+bones/4/rotation = Quaternion(-0.0392966, -0.0204542, 0.268114, 0.962368)
 bones/4/scale = Vector3(1, 1, 1)
-bones/5/rotation = Quaternion(0.0119853, -0.00197242, 0.00774249, 0.999896)
+bones/5/rotation = Quaternion(0.170897, 0.0740805, 0.0647924, 0.980361)
 bones/5/scale = Vector3(1, 1, 1)
-bones/6/rotation = Quaternion(-0.202972, -0.0512206, 0.44727, 0.869556)
-bones/7/rotation = Quaternion(-0.0323312, 0.0153181, -0.277296, 0.960118)
+bones/6/scale = Vector3(1, 1, 1)
+bones/7/rotation = Quaternion(-0.0335164, 0.0171355, -0.292217, 0.955611)
 bones/7/scale = Vector3(1, 1, 1)
-bones/8/rotation = Quaternion(0.0107633, -0.00606406, -0.0149438, 0.999812)
+bones/8/rotation = Quaternion(0.208397, -0.0472746, -0.0607506, 0.97501)
 bones/8/scale = Vector3(1, 1, 1)
-bones/9/position = Vector3(-1.40724e-09, -0.350217, -0.0647407)
-bones/9/rotation = Quaternion(0.547741, 0.343046, 0.672449, -0.36071)
+bones/9/position = Vector3(-1.78285e-09, -0.0753828, -0.0647407)
+bones/9/rotation = Quaternion(0.517379, 0.238544, 0.692479, -0.442594)
 bones/9/scale = Vector3(1, 1, 1)
-bones/10/rotation = Quaternion(0.132712, 0.0062977, -0.666807, 0.733291)
-bones/11/rotation = Quaternion(-0.0103643, -0.00254868, 0.000495972, 0.999943)
-bones/12/position = Vector3(1.40724e-09, -0.350217, -0.0647407)
-bones/12/rotation = Quaternion(-0.541959, 0.317283, 0.678504, 0.381109)
+bones/10/rotation = Quaternion(-0.000928274, 0.161505, -0.541891, 0.824784)
+bones/11/rotation = Quaternion(0.169744, -0.00176353, -0.0522982, 0.984098)
+bones/12/position = Vector3(1.78285e-09, -0.0753828, -0.0647407)
+bones/12/rotation = Quaternion(-0.267364, -0.0327055, 0.813502, 0.515423)
 bones/12/scale = Vector3(1, 1, 1)
-bones/13/rotation = Quaternion(0.128729, -0.00847691, 0.67214, 0.729099)
-bones/14/rotation = Quaternion(-0.0238748, -0.000298067, -0.00810348, 0.999682)
+bones/13/rotation = Quaternion(0.000348407, -0.129371, 0.476523, 0.869591)
+bones/14/rotation = Quaternion(0.654978, 0.0846159, 0.146189, 0.736528)
 
 [node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.4, 2.08165e-12)
@@ -123,16 +156,23 @@ text = "X 20"
 root_node = NodePath("../CollisionShape3D/Target/Mr_ Mackinley")
 tree_root = SubResource("AnimationNodeBlendTree_2h164")
 anim_player = NodePath("../CollisionShape3D/Target/Mr_ Mackinley/AnimationPlayer")
-parameters/Blend2/blend_amount = 0.04
+parameters/Blend2/blend_amount = 1.0
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
-transform = Transform3D(1, -0.000378913, -0.000884764, 0.000379764, 1, 0.000962593, 0.000884399, -0.000962929, 0.999999, 0, 0, 0)
-visible = false
-lifetime = 1.5
-speed_scale = 2.42
+amount = 20
+lifetime = 0.49
 randomness = 1.0
-mesh = SubResource("SphereMesh_yhh1r")
-spread = 90.6
-gravity = Vector3(2.08165e-12, 0.21, 2.08165e-12)
+mesh = SubResource("PlaneMesh_w05ve")
+emission_shape = 4
+emission_points = PackedVector3Array(-0.5, -0.66, 2.08165e-12, 0.5, -0.66, 2.08165e-12)
+direction = Vector3(2.08165e-12, 0.38, -1)
+spread = 30.82
+gravity = Vector3(2.08165e-12, -7, 2.08165e-12)
+initial_velocity_min = 3.89
+initial_velocity_max = 15.28
+linear_accel_min = -17.12
+linear_accel_max = 7.78
+damping_min = 8.869
+damping_max = 75.097
 
 [editable path="CollisionShape3D/Target/Mr_ Mackinley"]

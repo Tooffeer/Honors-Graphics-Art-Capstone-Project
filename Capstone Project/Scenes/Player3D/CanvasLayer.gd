@@ -1,6 +1,5 @@
 extends CanvasLayer
-
-#@onready var label = $Label
+@onready var counter = $HBoxContainer/Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,5 +9,4 @@ func _process(_delta):
 	updateInfo()
 
 func updateInfo():
-	#label.text = "Collectables: " + str(Global.collectables)
-	pass
+	counter.text = "Collectables: " + str(Global.collectables)

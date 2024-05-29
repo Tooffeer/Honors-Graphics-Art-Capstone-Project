@@ -15,6 +15,8 @@ background_mode = 2
 sky = SubResource("Sky_731w2")
 sky_rotation = Vector3(3.48787e-16, -2.05425, 3.48787e-16)
 ambient_light_source = 3
+reflected_light_source = 2
+fog_density = 0.0381
 
 [node name="World" type="Node3D"]
 

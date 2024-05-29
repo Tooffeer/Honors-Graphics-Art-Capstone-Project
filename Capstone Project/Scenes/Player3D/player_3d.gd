@@ -18,7 +18,7 @@ var DEACCEL = accel
 @export var jumpHeight : float = 2.3
 @export var timeToPeak : float = 0.36
 @export var timeToFall: float = 0.32
-@export var coyoteTime : float = 0.22
+@export var coyoteTime : float = 0.1
 var coyoteTimer : float = 0.0
 var canJump : bool = true
 
@@ -49,22 +49,29 @@ func _physics_process(delta):
 	if is_on_floor():
 		ACCEL = accel
 		DEACCEL = deaccel
+		
+		if Vector3(-velocity.x, 0, -velocity.z).length() >= moveSpeed - 2:
+			$CPUParticles3D.emitting = true
+		else:
+			$CPUParticles3D.emitting = false
 	else:
 		ACCEL = airAccel
 		DEACCEL = airDeaccel
+		$CPUParticles3D.emitting = false
 	
 	# Vertical movement
 	if direction:
-		velocity.x = direction.x * moveSpeed
-		velocity.z = direction.z * moveSpeed
+		#velocity.x = direction.x * moveSpeed
+		#velocity.z = direction.z * moveSpeed
 		
-		#velocity.x += direction.x * ACCEL * delta
-		#velocity.z += direction.z * ACCEL * delta
+		velocity.x = lerp(velocity.x, moveSpeed * direction.x, ACCEL * delta)
+		velocity.z = lerp(velocity.z, moveSpeed * direction.z, ACCEL * delta)
 		curAnim = RUN
 		model.rotation.y = atan2(velocity.x, velocity.z)
+		$CPUParticles3D.rotation.y = atan2(velocity.x, velocity.z)
 	else:
-		velocity.x = move_toward(velocity.x, direction.x, moveSpeed)
-		velocity.z = move_toward(velocity.z, direction.z, moveSpeed)
+		velocity.x = lerp(velocity.x, direction.x, DEACCEL * delta)
+		velocity.z = lerp(velocity.z, direction.z, DEACCEL * delta)
 		
 		#velocity.x -= velocity.x * DEACCEL * delta
 		#velocity.z -= velocity.z * DEACCEL * delta
@@ -82,7 +89,6 @@ func _physics_process(delta):
 	camera()
 	move_and_slide()
 	
-	
 	# Testing animation
 	match curAnim:
 		IDLE:
@@ -91,6 +97,7 @@ func _physics_process(delta):
 			value = lerpf(value, 1 * direction.length(), 15 * delta)
 	
 	animation()
+	
 
 func camera():
 	var input_axis = Input.get_vector("Camera Right", "Camera Left", "Camera Down", "Camera Up")
@@ -142,3 +149,4 @@ func getGravity(jumpGravity, fallGravity):
 
 func animation():
 	animation_tree["parameters/Blend2/blend_amount"] = value
+

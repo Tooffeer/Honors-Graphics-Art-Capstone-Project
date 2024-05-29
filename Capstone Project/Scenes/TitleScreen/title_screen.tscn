@@ -1,6 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://csbipluxt5wgp"]
+[gd_scene load_steps=5 format=3 uid="uid://csbipluxt5wgp"]
 
 [ext_resource type="Script" path="res://Scenes/TitleScreen/title_screen.gd" id="1_cij7l"]
+[ext_resource type="Shader" path="res://Scenes/TitleScreen/test.gdshader" id="2_03gw5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uqogl"]
+shader = ExtResource("2_03gw5")
 
 [sub_resource type="Theme" id="Theme_1ovww"]
 /colors/bi = Color(0.344712, 0.919957, 0.801309, 1)
@@ -30,6 +34,16 @@ offset_right = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.174986, 0.240396, 0.558083, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_uqogl")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Options" type="VBoxContainer" parent="."]
 layout_mode = 1
