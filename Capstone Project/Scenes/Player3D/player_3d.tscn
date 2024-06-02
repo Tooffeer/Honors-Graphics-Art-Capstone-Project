@@ -19,24 +19,6 @@ height = 1.68875
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xxvwa"]
 
-[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_yelxi"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sl1dd"]
-animation = &"Idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b8jfr"]
-animation = &"Run"
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2h164"]
-nodes/Blend2/node = SubResource("AnimationNodeBlend2_yelxi")
-nodes/Blend2/position = Vector2(440, 110)
-"nodes/Idle Animation/node" = SubResource("AnimationNodeAnimation_sl1dd")
-"nodes/Idle Animation/position" = Vector2(220, 100)
-"nodes/Run Animation/node" = SubResource("AnimationNodeAnimation_b8jfr")
-"nodes/Run Animation/position" = Vector2(220, 230)
-nodes/output/position = Vector2(620, 170)
-node_connections = [&"Blend2", 0, &"Idle Animation", &"Blend2", 1, &"Run Animation", &"output", 0, &"Blend2"]
-
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_xg8df"]
 frames = 6
 frame_0/texture = ExtResource("6_vu5k3")
@@ -67,16 +49,35 @@ material = SubResource("StandardMaterial3D_gu6cs")
 size = Vector2(0.7, 0.7)
 orientation = 2
 
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_yelxi"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sl1dd"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b8jfr"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2h164"]
+graph_offset = Vector2(-55.7881, 48.96)
+nodes/Blend2/node = SubResource("AnimationNodeBlend2_yelxi")
+nodes/Blend2/position = Vector2(440, 110)
+"nodes/Idle Animation/node" = SubResource("AnimationNodeAnimation_sl1dd")
+"nodes/Idle Animation/position" = Vector2(220, 100)
+"nodes/Run Animation/node" = SubResource("AnimationNodeAnimation_b8jfr")
+"nodes/Run Animation/position" = Vector2(220, 230)
+nodes/output/position = Vector2(620, 170)
+node_connections = [&"Blend2", 0, &"Idle Animation", &"Blend2", 1, &"Run Animation", &"output", 0, &"Blend2"]
+
 [node name="Player3D" type="CharacterBody3D" groups=["player"]]
 collision_layer = 2
 floor_constant_speed = true
 floor_snap_length = 0.3
 script = ExtResource("1_ig6b7")
 moveSpeed = 15.0
-accel = 41.0
-deaccel = 21.0
-airAccel = 30.0
-airDeaccel = 15.0
+accel = 37.0
+deaccel = 19.0
+airAccel = 6.5
+airDeaccel = 2.0
 jumpHeight = 4.6
 timeToPeak = 0.37
 timeToFall = 0.31
@@ -92,30 +93,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.144263, 0)
 script = ExtResource("3_q11yk")
 
 [node name="Skeleton3D" parent="CollisionShape3D/Target/Mr_ Mackinley/Armature" index="0"]
-bones/0/position = Vector3(-8.36756e-09, -0.0753828, -0.0647407)
-bones/0/rotation = Quaternion(0.17302, -1.14829e-07, 3.15715e-08, 0.984918)
-bones/1/rotation = Quaternion(0.311261, -0.0259371, -0.000680871, 0.94997)
-bones/2/rotation = Quaternion(0.486706, 0.00451023, -0.0092692, 0.873505)
+bones/0/position = Vector3(-2.1248e-08, 0.411931, -0.0647407)
+bones/0/rotation = Quaternion(0.0468642, -1.18887e-07, -3.35696e-09, 0.998901)
+bones/1/rotation = Quaternion(0.110213, -0.133246, -0.00349765, 0.98493)
+bones/2/rotation = Quaternion(0.769838, 0.0159165, -0.0408652, 0.636731)
 bones/3/scale = Vector3(1, 1, 1)
-bones/4/rotation = Quaternion(-0.0392966, -0.0204542, 0.268114, 0.962368)
+bones/4/rotation = Quaternion(-0.229936, -0.154827, 0.198402, 0.940104)
 bones/4/scale = Vector3(1, 1, 1)
-bones/5/rotation = Quaternion(0.170897, 0.0740805, 0.0647924, 0.980361)
+bones/5/rotation = Quaternion(-0.0477052, 0.105048, 0.0143375, 0.993219)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/scale = Vector3(1, 1, 1)
-bones/7/rotation = Quaternion(-0.0335164, 0.0171355, -0.292217, 0.955611)
+bones/7/rotation = Quaternion(-0.288011, 0.21347, -0.297406, 0.88489)
 bones/7/scale = Vector3(1, 1, 1)
-bones/8/rotation = Quaternion(0.208397, -0.0472746, -0.0607506, 0.97501)
+bones/8/rotation = Quaternion(-0.0210549, 0.132135, 0.196927, 0.971245)
 bones/8/scale = Vector3(1, 1, 1)
-bones/9/position = Vector3(-1.78285e-09, -0.0753828, -0.0647407)
-bones/9/rotation = Quaternion(0.517379, 0.238544, 0.692479, -0.442594)
+bones/9/position = Vector3(-4.14075e-08, 0.411931, -0.0647408)
+bones/9/rotation = Quaternion(0.230655, -0.379238, 0.660236, -0.605859)
 bones/9/scale = Vector3(1, 1, 1)
-bones/10/rotation = Quaternion(-0.000928274, 0.161505, -0.541891, 0.824784)
-bones/11/rotation = Quaternion(0.169744, -0.00176353, -0.0522982, 0.984098)
-bones/12/position = Vector3(1.78285e-09, -0.0753828, -0.0647407)
-bones/12/rotation = Quaternion(-0.267364, -0.0327055, 0.813502, 0.515423)
+bones/10/rotation = Quaternion(0.0471624, 0.219423, -0.428844, 0.875056)
+bones/11/rotation = Quaternion(0.103034, -0.00127296, -0.0348163, 0.994068)
+bones/12/position = Vector3(4.14075e-08, 0.411931, -0.0647408)
+bones/12/rotation = Quaternion(-0.521142, 0.525819, 0.660567, 0.12481)
 bones/12/scale = Vector3(1, 1, 1)
-bones/13/rotation = Quaternion(0.000348407, -0.129371, 0.476523, 0.869591)
-bones/14/rotation = Quaternion(0.654978, 0.0846159, 0.146189, 0.736528)
+bones/13/rotation = Quaternion(0.0927831, -0.082629, 0.381535, 0.915967)
+bones/14/rotation = Quaternion(0.395748, 0.0381082, 0.101308, 0.911959)
 
 [node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.4, 2.08165e-12)
@@ -131,7 +132,33 @@ margin = 0.06
 script = ExtResource("2_cdqoc")
 
 [node name="Camera3D" type="Camera3D" parent="CameraRoot"]
+doppler_tracking = 2
 fov = 90.0
+size = 18.844
+near = 0.001
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+amount = 20
+lifetime = 0.49
+randomness = 1.0
+mesh = SubResource("PlaneMesh_w05ve")
+emission_shape = 4
+emission_points = PackedVector3Array(-0.5, -0.66, 2.08165e-12, 0.5, -0.66, 2.08165e-12)
+direction = Vector3(2.08165e-12, 0.38, -1)
+spread = 30.82
+gravity = Vector3(2.08165e-12, -7, 2.08165e-12)
+initial_velocity_min = 3.89
+initial_velocity_max = 15.28
+linear_accel_min = -17.12
+linear_accel_max = 7.78
+damping_min = 8.869
+damping_max = 75.097
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../CollisionShape3D/Target/Mr_ Mackinley")
+tree_root = SubResource("AnimationNodeBlendTree_2h164")
+anim_player = NodePath("../CollisionShape3D/Target/Mr_ Mackinley/AnimationPlayer")
+parameters/Blend2/blend_amount = 1.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("2_gte4c")
@@ -151,28 +178,5 @@ layout_mode = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 43
 text = "X 20"
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-root_node = NodePath("../CollisionShape3D/Target/Mr_ Mackinley")
-tree_root = SubResource("AnimationNodeBlendTree_2h164")
-anim_player = NodePath("../CollisionShape3D/Target/Mr_ Mackinley/AnimationPlayer")
-parameters/Blend2/blend_amount = 1.0
-
-[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
-amount = 20
-lifetime = 0.49
-randomness = 1.0
-mesh = SubResource("PlaneMesh_w05ve")
-emission_shape = 4
-emission_points = PackedVector3Array(-0.5, -0.66, 2.08165e-12, 0.5, -0.66, 2.08165e-12)
-direction = Vector3(2.08165e-12, 0.38, -1)
-spread = 30.82
-gravity = Vector3(2.08165e-12, -7, 2.08165e-12)
-initial_velocity_min = 3.89
-initial_velocity_max = 15.28
-linear_accel_min = -17.12
-linear_accel_max = 7.78
-damping_min = 8.869
-damping_max = 75.097
 
 [editable path="CollisionShape3D/Target/Mr_ Mackinley"]

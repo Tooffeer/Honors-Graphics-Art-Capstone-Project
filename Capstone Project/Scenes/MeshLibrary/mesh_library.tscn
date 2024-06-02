@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c1o8c5md3supj"]
+[gd_scene load_steps=15 format=3 uid="uid://c1o8c5md3supj"]
 
 [ext_resource type="Material" uid="uid://j3amdj3pnl3x" path="res://Assets/Materials/Grass.tres" id="1_g32do"]
 [ext_resource type="Material" uid="uid://dsw1480vqjntc" path="res://Assets/Materials/Brick.tres" id="2_ag4ha"]
@@ -31,6 +31,21 @@ size = Vector3(4, 4, 4)
 [sub_resource type="BoxMesh" id="BoxMesh_8bxyu"]
 material = ExtResource("4_ra71o")
 size = Vector3(4, 4, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5u77l"]
+albedo_color = Color(0.835294, 0.643137, 0.0980392, 1)
+roughness = 0.33
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gw2rw"]
+material = SubResource("StandardMaterial3D_5u77l")
+top_radius = 2.0
+bottom_radius = 2.0
+height = 4.0
+radial_segments = 9
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vm8vr"]
+height = 4.0
+radius = 1.86
 
 [node name="MeshLibrary" type="Node3D"]
 
@@ -83,3 +98,12 @@ skeleton = NodePath("../Brick/SimpleCube3/CollisionShape3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Locker/SimpleCube3"]
 shape = SubResource("BoxShape3D_ih85v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2, 2)
+mesh = SubResource("CylinderMesh_gw2rw")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("CylinderShape3D_vm8vr")

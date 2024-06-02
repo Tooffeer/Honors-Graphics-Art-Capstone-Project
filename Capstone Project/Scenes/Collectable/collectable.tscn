@@ -11,7 +11,7 @@ inner_radius = 0.169
 outer_radius = 0.886
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_deuxl"]
-radius = 0.600813
+radius = 0.829167
 
 [node name="Collectable" type="Node3D"]
 script = ExtResource("1_qav4w")

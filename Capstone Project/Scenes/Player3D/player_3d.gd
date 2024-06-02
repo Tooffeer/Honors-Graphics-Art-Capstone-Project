@@ -4,6 +4,7 @@ extends CharacterBody3D
 @onready var spring_arm_3d = $Pivot/SpringArm3D
 @onready var model = $CollisionShape3D/Target
 @onready var animation_tree = $AnimationTree
+@onready var particles = $CPUParticles3D
 
 # Movement
 @export var moveSpeed : float = 7.5
@@ -18,7 +19,7 @@ var DEACCEL = accel
 @export var jumpHeight : float = 2.3
 @export var timeToPeak : float = 0.36
 @export var timeToFall: float = 0.32
-@export var coyoteTime : float = 0.1
+@export var coyoteTime : float = 0.14
 var coyoteTimer : float = 0.0
 var canJump : bool = true
 
@@ -27,7 +28,7 @@ var canJump : bool = true
 @export var horCamSensitivity : float = 0.062
 
 # Animation
-enum {IDLE, RUN}
+enum {IDLE, RUN, FALL, RISE}
 var curAnim = IDLE
 var value = 0
 
@@ -38,9 +39,6 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta):
-	# Need to fix everything here
-	
-	
 	# Get input and direction based off of camera
 	var input_axis = Input.get_vector("Left", "Right", "Forward", "Backward")
 	var direction = (pivot.basis * Vector3(input_axis.x, 0, input_axis.y))
@@ -51,30 +49,24 @@ func _physics_process(delta):
 		DEACCEL = deaccel
 		
 		if Vector3(-velocity.x, 0, -velocity.z).length() >= moveSpeed - 2:
-			$CPUParticles3D.emitting = true
+			particles.emitting = true
 		else:
-			$CPUParticles3D.emitting = false
+			particles.emitting = false
 	else:
 		ACCEL = airAccel
 		DEACCEL = airDeaccel
-		$CPUParticles3D.emitting = false
+		particles.emitting = false
 	
 	# Vertical movement
 	if direction:
-		#velocity.x = direction.x * moveSpeed
-		#velocity.z = direction.z * moveSpeed
-		
 		velocity.x = lerp(velocity.x, moveSpeed * direction.x, ACCEL * delta)
 		velocity.z = lerp(velocity.z, moveSpeed * direction.z, ACCEL * delta)
 		curAnim = RUN
 		model.rotation.y = atan2(velocity.x, velocity.z)
-		$CPUParticles3D.rotation.y = atan2(velocity.x, velocity.z)
+		particles.rotation.y = atan2(velocity.x, velocity.z)
 	else:
 		velocity.x = lerp(velocity.x, direction.x, DEACCEL * delta)
 		velocity.z = lerp(velocity.z, direction.z, DEACCEL * delta)
-		
-		#velocity.x -= velocity.x * DEACCEL * delta
-		#velocity.z -= velocity.z * DEACCEL * delta
 		curAnim = IDLE
 	
 	
@@ -104,21 +96,6 @@ func camera():
 	pivot.rotate_y(input_axis.x * horCamSensitivity)
 	spring_arm_3d.rotate_x(input_axis.y * verCamSensitivity)
 	spring_arm_3d.rotation.x = clamp(spring_arm_3d.rotation.x, deg_to_rad(-70), deg_to_rad(40))
-	
-	#pivot.top_level = true
-	#var cam_offset = 2.4
-	#
-	#pivot.position.x = position.x
-	#pivot.position.z = position.z
-	#
-	#var vertical_distance = position.y - pivot.position.y
-	#print(vertical_distance)
-	#
-	##if vertical_distance > 0
-	#
-	#if is_on_floor() or vertical_distance <= -5 or vertical_distance >= 4.5:
-		#pivot.position.y = lerp(pivot.position.y, position.y + cam_offset, 0.2)
-	
 
 func jump(delta):
 	# "Building a Better Jump" - J. Kyle Pittman
@@ -149,4 +126,3 @@ func getGravity(jumpGravity, fallGravity):
 
 func animation():
 	animation_tree["parameters/Blend2/blend_amount"] = value
-
