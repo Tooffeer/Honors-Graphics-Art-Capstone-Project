@@ -17,6 +17,7 @@ radius = 0.829167
 script = ExtResource("1_qav4w")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.664109, 0.747636, 0, -0.747636, 0.664109, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("TorusMesh_jwp7n")
 skeleton = NodePath("../Area3D/CollisionShape3D")
 

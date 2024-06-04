@@ -6,6 +6,10 @@ extends CharacterBody3D
 @onready var animation_tree = $AnimationTree
 @onready var particles = $CPUParticles3D
 
+# Camera
+@export var verCamSensitivity : float  = 0.04
+@export var horCamSensitivity : float = 0.062
+
 # Movement
 @export var moveSpeed : float = 7.5
 @export var accel : float = 14
@@ -16,21 +20,19 @@ var ACCEL = accel
 var DEACCEL = accel
 
 # Jumping
-@export var jumpHeight : float = 2.3
-@export var timeToPeak : float = 0.36
-@export var timeToFall: float = 0.32
+@export var jumpHeight : float = 4.6
+@export var timeToPeak : float = 0.37
+@export var timeToFall: float = 0.31
 @export var coyoteTime : float = 0.14
 var coyoteTimer : float = 0.0
 var canJump : bool = true
-
-# Camera
-@export var verCamSensitivity : float  = 0.04
-@export var horCamSensitivity : float = 0.062
 
 # Animation
 enum {IDLE, RUN, FALL, RISE}
 var curAnim = IDLE
 var value = 0
+var value2 = 0
+var value3 = 0
 
 func _ready():
 	# Set reference to global
@@ -61,17 +63,19 @@ func _physics_process(delta):
 	if direction:
 		velocity.x = lerp(velocity.x, moveSpeed * direction.x, ACCEL * delta)
 		velocity.z = lerp(velocity.z, moveSpeed * direction.z, ACCEL * delta)
-		curAnim = RUN
+		
+		# Rotate mesh to face direction
 		model.rotation.y = atan2(velocity.x, velocity.z)
 		particles.rotation.y = atan2(velocity.x, velocity.z)
 	else:
 		velocity.x = lerp(velocity.x, direction.x, DEACCEL * delta)
 		velocity.z = lerp(velocity.z, direction.z, DEACCEL * delta)
-		curAnim = IDLE
+		
 	
 	
 	velocity.x = clamp(velocity.x, -moveSpeed, moveSpeed)
 	velocity.z = clamp(velocity.z, -moveSpeed, moveSpeed)
+	
 	var test = Vector2(velocity.x, velocity.z)
 	if test.length() >= moveSpeed:
 		velocity.x = velocity.normalized().x * moveSpeed
@@ -81,12 +85,30 @@ func _physics_process(delta):
 	camera()
 	move_and_slide()
 	
+	# Figure out animation
+	if velocity.y > 0:
+		curAnim = RISE
+	elif velocity.y < 0:
+		curAnim = FALL
+	elif direction and velocity.y == 0:
+		curAnim = RUN
+	else:
+		curAnim = IDLE
+	
 	# Testing animation
 	match curAnim:
 		IDLE:
 			value = lerpf(value, 0, 15 * delta)
+			value3 = lerpf(value3, 0, 15 * delta)
 		RUN:
 			value = lerpf(value, 1 * direction.length(), 15 * delta)
+			value3 = lerpf(value3, 0, 15 * delta)
+		FALL:
+			value2 = lerpf(value2, 0, 15 * delta)
+			value3 = lerpf(value3, 1, 8 * delta)
+		RISE:
+			value2 = lerpf(value2, 1, 15 * delta)
+			value3 = lerpf(value3, 1, 8 * delta)
 	
 	animation()
 	
@@ -101,7 +123,7 @@ func jump(delta):
 	# "Building a Better Jump" - J. Kyle Pittman
 	var jumpVelocity : float = (2.0 * jumpHeight) / timeToPeak
 	var jumpGravity : float = -(2.0 * jumpHeight) / pow(timeToPeak, 2.0)
-	var fallGravity : float = -(2.0 * jumpHeight) / pow(timeToFall, 2.0)
+	var fallGravity : float = -(2.0 * jumpHeight) / pow(timeToFall, 2.0) 
 	
 	if not is_on_floor():
 		# Apply gravity
@@ -125,4 +147,6 @@ func getGravity(jumpGravity, fallGravity):
 		return fallGravity
 
 func animation():
-	animation_tree["parameters/Blend2/blend_amount"] = value
+	animation_tree["parameters/Blend1/blend_amount"] = value
+	animation_tree["parameters/Blend2/blend_amount"] = value2
+	animation_tree["parameters/Blend3/blend_amount"] = value3
