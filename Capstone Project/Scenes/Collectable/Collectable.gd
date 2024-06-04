@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var mesh = $MeshInstance3D
+@onready var mesh = $Bagel
 
 @export var rotSpeed = 1.4
 

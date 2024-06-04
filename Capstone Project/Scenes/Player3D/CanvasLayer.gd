@@ -9,4 +9,4 @@ func _process(_delta):
 	updateInfo()
 
 func updateInfo():
-	counter.text = "Collectables: " + str(Global.collectables)
+	counter.text = "X " + str(Global.collectables)

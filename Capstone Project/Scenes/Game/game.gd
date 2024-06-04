@@ -6,6 +6,9 @@ var playerScene = preload("res://Scenes/Player3D/player_3d.tscn").instantiate()
 
 func _ready():
 	Global.connect("startGame", start_game)
+	
+	# Capture mouse
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _unhandled_input(_event):
 	# Quick close, remove later

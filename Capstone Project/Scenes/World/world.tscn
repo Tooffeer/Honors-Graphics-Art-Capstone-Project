@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://ciaptb12k2hni"]
+[gd_scene load_steps=10 format=3 uid="uid://ciaptb12k2hni"]
 
 [ext_resource type="PackedScene" uid="uid://y0qwee3fait1" path="res://Scenes/Collectable/collectable.tscn" id="1_5qeyd"]
+[ext_resource type="Script" path="res://Scripts/MeshInterpolation.gd" id="3_svem0"]
 [ext_resource type="MeshLibrary" uid="uid://cfj00sw6k4vcy" path="res://Assets/Library.tres" id="7_dly5a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wcyxh"]
@@ -16,6 +17,15 @@ sky = SubResource("Sky_sfqp7")
 ambient_light_source = 3
 reflected_light_source = 2
 fog_density = 0.0381
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_n7p1q"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ast7p"]
+radius = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_y3866"]
+radius = 1.0
+height = 2.0
 
 [node name="World" type="Node3D"]
 
@@ -47,3 +57,17 @@ directional_shadow_max_distance = 150.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
 environment = SubResource("Environment_vkfre")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62421, 0)
+collision_layer = 4
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_n7p1q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_ast7p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/CollisionShape3D"]
+mesh = SubResource("SphereMesh_y3866")
+skeleton = NodePath("../..")
+script = ExtResource("3_svem0")
