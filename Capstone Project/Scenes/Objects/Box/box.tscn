@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvxkdt2i4akrn"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mhttm"]
+friction = 2.5
+rough = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_44fd1"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8odir"]
+albedo_color = Color(1, 0.465715, 0.34982, 1)
+roughness = 0.06
+
+[sub_resource type="BoxMesh" id="BoxMesh_igg76"]
+material = SubResource("StandardMaterial3D_8odir")
+size = Vector3(2, 2, 2)
+
+[node name="Box" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 7
+mass = 3.0
+physics_material_override = SubResource("PhysicsMaterial_mhttm")
+gravity_scale = 2.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_44fd1")
+
+[node name="Box" type="MeshInstance3D" parent="CollisionShape3D"]
+layers = 4
+mesh = SubResource("BoxMesh_igg76")
+skeleton = NodePath("../..")
