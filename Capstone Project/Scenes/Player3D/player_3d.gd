@@ -136,7 +136,7 @@ func jump(delta):
 		canJump = true
 	
 	# Jump
-	if Input.is_action_pressed("Jump") and canJump and coyoteTimer <= coyoteTime:
+	if Input.is_action_just_pressed("Jump") and canJump and coyoteTimer <= coyoteTime:
 		velocity.y = jumpVelocity
 		canJump = false
 

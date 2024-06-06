@@ -1,4 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvxkdt2i4akrn"]
+[gd_scene load_steps=6 format=3 uid="uid://bvxkdt2i4akrn"]
+
+[ext_resource type="Script" path="res://Scripts/MeshInterpolation.gd" id="1_88yot"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mhttm"]
 friction = 2.5
@@ -29,3 +31,4 @@ shape = SubResource("BoxShape3D_44fd1")
 layers = 4
 mesh = SubResource("BoxMesh_igg76")
 skeleton = NodePath("../..")
+script = ExtResource("1_88yot")
