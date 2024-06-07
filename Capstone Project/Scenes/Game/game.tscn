@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://d0gq28um20d1y"]
 
-[ext_resource type="Script" path="res://scenes/Game/game.gd" id="1_40ddj"]
+[ext_resource type="Script" path="res://Scenes/Game/game.gd" id="1_40ddj"]
 [ext_resource type="PackedScene" uid="uid://csbipluxt5wgp" path="res://Scenes/TitleScreen/title_screen.tscn" id="4_0aujd"]
 
 [sub_resource type="SystemFont" id="SystemFont_tc163"]
