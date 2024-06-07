@@ -1,6 +1,7 @@
 extends Node
 
 signal startGame
+signal gameOver
 
 var playerNode : Node = null
 

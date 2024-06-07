@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://t1fxqyckyofj"]
+[gd_scene load_steps=39 format=3 uid="uid://t1fxqyckyofj"]
 
 [ext_resource type="Script" path="res://Scenes/Player3D/player_3d.gd" id="1_ig6b7"]
 [ext_resource type="PackedScene" uid="uid://tx4gafcm2182" path="res://Assets/Blender/Mr. Mackinley/Mr. Mackinley.blend" id="2_c6oc5"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://c4rvvk24bmlmj" path="res://Assets/Textures/Bagel Render/0008.png" id="21_1ir2p"]
 [ext_resource type="Texture2D" uid="uid://ca8dw4e2m8tgq" path="res://Assets/Textures/Bagel Render/0009.png" id="22_tkjuq"]
 [ext_resource type="Texture2D" uid="uid://b11dnekdqdxc" path="res://Assets/Textures/Bagel Render/0010.png" id="23_olwla"]
+[ext_resource type="AudioStream" uid="uid://dbanoavkuvtdv" path="res://Assets/Audio/jump.wav" id="24_khonh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qo1ih"]
 margin = 0.008
@@ -150,30 +151,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.144263, 0)
 script = ExtResource("3_u0f5w")
 
 [node name="Skeleton3D" parent="CollisionShape3D/Target/Mr_ Mackinley/Armature" index="0"]
-bones/0/position = Vector3(-1.60227e-08, 0.283288, -0.0647407)
-bones/0/rotation = Quaternion(0.0402314, -1.19055e-07, -4.12813e-09, 0.99919)
-bones/1/rotation = Quaternion(0.221463, -0.102349, -0.00268667, 0.969779)
-bones/2/rotation = Quaternion(0.700023, 0.0121047, -0.0311353, 0.713338)
+bones/0/position = Vector3(-2.41697e-08, -0.0521588, -0.0647408)
+bones/0/rotation = Quaternion(0.167898, -1.15352e-07, 7.48832e-08, 0.985804)
+bones/1/rotation = Quaternion(0.302288, 0.0369609, 0.00097015, 0.952499)
+bones/2/rotation = Quaternion(0.497419, -0.00871003, 0.0152723, 0.867332)
+bones/3/rotation = Quaternion(-0.202972, 0.0512208, -0.44727, 0.869556)
 bones/3/scale = Vector3(1, 1, 1)
-bones/4/rotation = Quaternion(-0.178089, -0.118169, 0.221136, 0.951535)
+bones/4/rotation = Quaternion(-0.0545809, -0.0326444, 0.29218, 0.954246)
 bones/4/scale = Vector3(1, 1, 1)
-bones/5/rotation = Quaternion(0.019469, 0.0970004, 0.030658, 0.994622)
+bones/5/rotation = Quaternion(0.16619, 0.0216065, 0.0393095, 0.985073)
 bones/5/scale = Vector3(1, 1, 1)
+bones/6/rotation = Quaternion(-0.202972, -0.0512206, 0.44727, 0.869556)
 bones/6/scale = Vector3(1, 1, 1)
-bones/7/rotation = Quaternion(-0.225698, 0.165196, -0.29608, 0.913295)
+bones/7/rotation = Quaternion(-0.0383258, 0.0198444, -0.266247, 0.962938)
 bones/7/scale = Vector3(1, 1, 1)
-bones/8/rotation = Quaternion(0.0305921, 0.0860485, 0.133342, 0.986853)
+bones/8/rotation = Quaternion(0.193564, -0.0868317, -0.0724584, 0.974548)
 bones/8/scale = Vector3(1, 1, 1)
-bones/9/position = Vector3(3.32382e-09, 0.283288, -0.0647407)
-bones/9/rotation = Quaternion(0.234212, -0.314636, 0.68616, -0.612645)
+bones/9/position = Vector3(1.35031e-08, -0.0521588, -0.0647407)
+bones/9/rotation = Quaternion(0.554203, 0.401294, 0.667222, -0.294341)
 bones/9/scale = Vector3(1, 1, 1)
-bones/10/rotation = Quaternion(0.00472575, 0.206432, -0.501512, 0.840149)
-bones/11/rotation = Quaternion(0.240055, -0.00299271, -0.0815123, 0.967326)
-bones/12/position = Vector3(-3.32382e-09, 0.283288, -0.0647407)
-bones/12/rotation = Quaternion(-0.532991, 0.48085, 0.669729, 0.190175)
+bones/10/rotation = Quaternion(-0.0234763, 0.145836, -0.574655, 0.804955)
+bones/11/rotation = Quaternion(0.201332, -0.0113973, -0.0893575, 0.975372)
+bones/12/position = Vector3(-1.35031e-08, -0.0521588, -0.0647407)
+bones/12/rotation = Quaternion(-0.220515, -0.197485, 0.751362, 0.589769)
 bones/12/scale = Vector3(1, 1, 1)
-bones/13/rotation = Quaternion(0.0608128, -0.100786, 0.438563, 0.890958)
-bones/14/rotation = Quaternion(0.29763, 0.0212741, 0.0835538, 0.95078)
+bones/13/rotation = Quaternion(-0.0105793, -0.0913819, 0.456427, 0.884993)
+bones/14/rotation = Quaternion(0.613941, 0.0786442, 0.137698, 0.77326)
 
 [node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.4, 2.08165e-12)
@@ -241,6 +244,8 @@ parameters/Blend1/blend_amount = 1.0
 parameters/Blend2/blend_amount = 1.0
 parameters/Blend3/blend_amount = 0
 
-[node name="Footsteps" type="AudioStreamPlayer" parent="."]
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("24_khonh")
+volume_db = -12.689
 
 [editable path="CollisionShape3D/Target/Mr_ Mackinley"]

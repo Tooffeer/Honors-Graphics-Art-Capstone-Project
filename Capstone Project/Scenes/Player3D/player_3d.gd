@@ -139,6 +139,8 @@ func jump(delta):
 	if Input.is_action_just_pressed("Jump") and canJump and coyoteTimer <= coyoteTime:
 		velocity.y = jumpVelocity
 		canJump = false
+		
+		$JumpSound.play()
 
 func getGravity(jumpGravity, fallGravity):
 	if velocity.y > 0.0: 

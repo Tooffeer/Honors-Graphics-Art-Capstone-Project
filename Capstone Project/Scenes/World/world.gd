@@ -2,12 +2,15 @@ extends Node3D
 @onready var environment = $Lighting/WorldEnvironment.environment
 @onready var gate = $Gate
 
-
-
 var gateState : bool = false
 
 var density = 0.0
 var light = 1.0
+
+# Audio stuff
+@onready var birds = $Audio/Birds
+@onready var scary = $Audio/scary
+@onready var hum = $Audio/Buzzz
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,3 +34,10 @@ func _process(delta):
 		environment.volumetric_fog_enabled = true
 		density = move_toward(density, 0.13, 0.25 * delta)
 		light = move_toward(light, 0.0, delta)
+		
+		#  music
+		if birds.playing:
+			birds.stop()
+		if !scary.playing:
+			scary.play()
+			hum.play()

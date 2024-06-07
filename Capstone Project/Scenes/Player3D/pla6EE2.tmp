@@ -1,0 +1,248 @@
+[gd_scene load_steps=38 format=3 uid="uid://t1fxqyckyofj"]
+
+[ext_resource type="Script" path="res://Scenes/Player3D/player_3d.gd" id="1_ig6b7"]
+[ext_resource type="PackedScene" uid="uid://tx4gafcm2182" path="res://Assets/Blender/Mr. Mackinley/Mr. Mackinley.blend" id="2_c6oc5"]
+[ext_resource type="Script" path="res://Scenes/Player3D/CameraInterpolation.gd" id="2_cdqoc"]
+[ext_resource type="Script" path="res://Scenes/Player3D/CanvasLayer.gd" id="2_gte4c"]
+[ext_resource type="Script" path="res://Scripts/MeshInterpolation.gd" id="3_u0f5w"]
+[ext_resource type="Texture2D" uid="uid://b8q71dir0phh6" path="res://Assets/Textures/Dust Frames/Dust6.png" id="6_vu5k3"]
+[ext_resource type="Texture2D" uid="uid://b225sthj6dbon" path="res://Assets/Textures/Dust Frames/Dust1.png" id="7_iwqq3"]
+[ext_resource type="Texture2D" uid="uid://13c8wvtl8r7s" path="res://Assets/Textures/Dust Frames/Dust2.png" id="8_mjfmj"]
+[ext_resource type="Texture2D" uid="uid://csf2a33d5fh4i" path="res://Assets/Textures/Dust Frames/Dust3.png" id="9_1q7a2"]
+[ext_resource type="Texture2D" uid="uid://c4jk5qn36vm62" path="res://Assets/Textures/Dust Frames/Dust4.png" id="10_h1jtc"]
+[ext_resource type="Texture2D" uid="uid://ts3hjwc7j4vd" path="res://Assets/Textures/Dust Frames/Dust5.png" id="11_wtkwc"]
+[ext_resource type="Texture2D" uid="uid://s4rna3fy8fhu" path="res://Assets/Textures/Bagel Render/0001.png" id="12_8lr01"]
+[ext_resource type="Texture2D" uid="uid://cmld00svfuqy1" path="res://Assets/Textures/Bagel Render/0002.png" id="13_63acs"]
+[ext_resource type="Texture2D" uid="uid://cxwykatcp1hnw" path="res://Assets/Textures/Bagel Render/0011.png" id="14_cfd78"]
+[ext_resource type="Texture2D" uid="uid://cte121up7fbqp" path="res://Assets/Textures/Bagel Render/0012.png" id="15_vh3ju"]
+[ext_resource type="Texture2D" uid="uid://c27pd57apumap" path="res://Assets/Textures/Bagel Render/0003.png" id="16_2p4q5"]
+[ext_resource type="Texture2D" uid="uid://cp8x8ybeamah4" path="res://Assets/Textures/Bagel Render/0004.png" id="17_8dfqy"]
+[ext_resource type="Texture2D" uid="uid://dekdq5eujajdg" path="res://Assets/Textures/Bagel Render/0005.png" id="18_n03pj"]
+[ext_resource type="Texture2D" uid="uid://rtnncmvjenfd" path="res://Assets/Textures/Bagel Render/0006.png" id="19_ufmho"]
+[ext_resource type="Texture2D" uid="uid://d1eieovfd46ni" path="res://Assets/Textures/Bagel Render/0007.png" id="20_4k5nm"]
+[ext_resource type="Texture2D" uid="uid://c4rvvk24bmlmj" path="res://Assets/Textures/Bagel Render/0008.png" id="21_1ir2p"]
+[ext_resource type="Texture2D" uid="uid://ca8dw4e2m8tgq" path="res://Assets/Textures/Bagel Render/0009.png" id="22_tkjuq"]
+[ext_resource type="Texture2D" uid="uid://b11dnekdqdxc" path="res://Assets/Textures/Bagel Render/0010.png" id="23_olwla"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qo1ih"]
+margin = 0.008
+radius = 0.777457
+height = 1.68875
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xxvwa"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_xg8df"]
+frames = 6
+frame_0/texture = ExtResource("6_vu5k3")
+frame_0/duration = 0.1
+frame_1/texture = ExtResource("7_iwqq3")
+frame_1/duration = 0.1
+frame_2/texture = ExtResource("8_mjfmj")
+frame_2/duration = 0.1
+frame_3/texture = ExtResource("9_1q7a2")
+frame_3/duration = 0.1
+frame_4/texture = ExtResource("10_h1jtc")
+frame_4/duration = 0.1
+frame_5/texture = ExtResource("11_wtkwc")
+frame_5/duration = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gu6cs"]
+transparency = 1
+shading_mode = 0
+diffuse_mode = 3
+albedo_texture = SubResource("AnimatedTexture_xg8df")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_w05ve"]
+material = SubResource("StandardMaterial3D_gu6cs")
+size = Vector2(0.7, 0.7)
+orientation = 2
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_xad2n"]
+frames = 12
+speed_scale = 6.8
+frame_0/texture = ExtResource("12_8lr01")
+frame_1/texture = ExtResource("13_63acs")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("16_2p4q5")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("17_8dfqy")
+frame_3/duration = 1.0
+frame_4/texture = ExtResource("18_n03pj")
+frame_4/duration = 1.0
+frame_5/texture = ExtResource("19_ufmho")
+frame_5/duration = 1.0
+frame_6/texture = ExtResource("20_4k5nm")
+frame_6/duration = 1.0
+frame_7/texture = ExtResource("21_1ir2p")
+frame_7/duration = 1.0
+frame_8/texture = ExtResource("22_tkjuq")
+frame_8/duration = 1.0
+frame_9/texture = ExtResource("23_olwla")
+frame_9/duration = 1.0
+frame_10/texture = ExtResource("14_cfd78")
+frame_10/duration = 1.0
+frame_11/texture = ExtResource("15_vh3ju")
+frame_11/duration = 1.0
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_yelxi"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_53ifr"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_y8pgb"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_safi6"]
+animation = &"Fall"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sl1dd"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yruhu"]
+animation = &"Jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b8jfr"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2h164"]
+nodes/Blend1/node = SubResource("AnimationNodeBlend2_yelxi")
+nodes/Blend1/position = Vector2(400, 120)
+nodes/Blend2/node = SubResource("AnimationNodeBlend2_53ifr")
+nodes/Blend2/position = Vector2(400, 330)
+nodes/Blend3/node = SubResource("AnimationNodeBlend2_y8pgb")
+nodes/Blend3/position = Vector2(637.128, 165.975)
+nodes/Falling/node = SubResource("AnimationNodeAnimation_safi6")
+nodes/Falling/position = Vector2(220, 380)
+nodes/Idling/node = SubResource("AnimationNodeAnimation_sl1dd")
+nodes/Idling/position = Vector2(220, 100)
+nodes/Rising/node = SubResource("AnimationNodeAnimation_yruhu")
+nodes/Rising/position = Vector2(220, 510)
+nodes/Running/node = SubResource("AnimationNodeAnimation_b8jfr")
+nodes/Running/position = Vector2(220, 230)
+nodes/output/position = Vector2(900, 150)
+node_connections = [&"Blend1", 0, &"Idling", &"Blend1", 1, &"Running", &"Blend2", 0, &"Falling", &"Blend2", 1, &"Rising", &"Blend3", 0, &"Blend1", &"Blend3", 1, &"Blend2", &"output", 0, &"Blend3"]
+
+[node name="Player3D" type="CharacterBody3D" groups=["player"]]
+collision_layer = 2
+collision_mask = 9
+floor_stop_on_slope = false
+floor_constant_speed = true
+floor_snap_length = 0.3
+script = ExtResource("1_ig6b7")
+verCamSensitivity = 0.042
+moveSpeed = 15.0
+accel = 37.0
+deaccel = 19.0
+airAccel = 6.5
+airDeaccel = 1.6
+jumpHeight = 4.7
+coyoteTime = 0.16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_qo1ih")
+
+[node name="Target" type="Node3D" parent="CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.144263, 0)
+
+[node name="Mr_ Mackinley" parent="CollisionShape3D/Target" instance=ExtResource("2_c6oc5")]
+script = ExtResource("3_u0f5w")
+
+[node name="Skeleton3D" parent="CollisionShape3D/Target/Mr_ Mackinley/Armature" index="0"]
+bones/0/position = Vector3(-4.09467e-08, 0.360885, -0.0647408)
+bones/0/rotation = Quaternion(0.0415933, -1.1948e-07, 6.0291e-08, 0.999135)
+bones/1/rotation = Quaternion(0.165258, 0.118415, 0.00310823, 0.979111)
+bones/2/rotation = Quaternion(0.713122, -0.0333557, 0.0535153, 0.698199)
+bones/3/rotation = Quaternion(-0.202972, 0.0512208, -0.44727, 0.869556)
+bones/3/scale = Vector3(1, 1, 1)
+bones/4/rotation = Quaternion(-0.256331, -0.18903, 0.297638, 0.899985)
+bones/4/scale = Vector3(1, 1, 1)
+bones/5/rotation = Quaternion(0.00966115, -0.108035, -0.164702, 0.980361)
+bones/5/scale = Vector3(1, 1, 1)
+bones/6/rotation = Quaternion(-0.202972, -0.0512206, 0.44727, 0.869556)
+bones/6/scale = Vector3(1, 1, 1)
+bones/7/rotation = Quaternion(-0.206212, 0.138045, -0.209097, 0.945885)
+bones/7/scale = Vector3(1, 1, 1)
+bones/8/rotation = Quaternion(-0.0202982, -0.0990988, -0.0206409, 0.994656)
+bones/8/scale = Vector3(1, 1, 1)
+bones/9/position = Vector3(-2.82737e-08, 0.360885, -0.0647408)
+bones/9/rotation = Quaternion(0.501603, 0.459773, 0.70539, -0.198566)
+bones/9/scale = Vector3(1, 1, 1)
+bones/10/rotation = Quaternion(0.0748529, 0.0934274, -0.409005, 0.904645)
+bones/11/rotation = Quaternion(0.414972, -0.0710369, -0.216009, 0.880961)
+bones/12/position = Vector3(2.82737e-08, 0.360885, -0.0647408)
+bones/12/rotation = Quaternion(-0.239334, -0.246212, 0.703554, 0.622182)
+bones/12/scale = Vector3(1, 1, 1)
+bones/13/rotation = Quaternion(-0.0247048, -0.149894, 0.556527, 0.816823)
+bones/14/rotation = Quaternion(0.101331, 0.00126302, 0.0344093, 0.994257)
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.4, 2.08165e-12)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Pivot"]
+shape = SubResource("SphereShape3D_xxvwa")
+spring_length = 6.545
+margin = 0.06
+
+[node name="Marker3D" type="Marker3D" parent="Pivot/SpringArm3D"]
+
+[node name="CameraRoot" type="Node3D" parent="."]
+script = ExtResource("2_cdqoc")
+
+[node name="Camera3D" type="Camera3D" parent="CameraRoot"]
+doppler_tracking = 2
+fov = 90.0
+size = 18.844
+near = 0.001
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+amount = 20
+lifetime = 0.49
+randomness = 1.0
+mesh = SubResource("PlaneMesh_w05ve")
+emission_shape = 4
+emission_points = PackedVector3Array(-0.5, -0.66, 2.08165e-12, 0.5, -0.66, 2.08165e-12)
+direction = Vector3(2.08165e-12, 0.38, -1)
+spread = 30.82
+gravity = Vector3(2.08165e-12, -7, 2.08165e-12)
+initial_velocity_min = 3.89
+initial_velocity_max = 15.28
+linear_accel_min = -17.12
+linear_accel_max = 7.78
+damping_min = 8.869
+damping_max = 75.097
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("2_gte4c")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 39.0
+offset_top = 53.0
+offset_right = 281.0
+offset_bottom = 183.0
+rotation = -0.125728
+theme_override_constants/separation = -6
+
+[node name="Bagel Icon" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 2
+texture = SubResource("AnimatedTexture_xad2n")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 43
+text = "X 20"
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../CollisionShape3D/Target/Mr_ Mackinley")
+tree_root = SubResource("AnimationNodeBlendTree_2h164")
+anim_player = NodePath("../CollisionShape3D/Target/Mr_ Mackinley/AnimationPlayer")
+parameters/Blend1/blend_amount = 1.0
+parameters/Blend2/blend_amount = 1.0
+parameters/Blend3/blend_amount = 0
+
+[node name="Footsteps" type="AudioStreamPlayer" parent="."]
+
+[editable path="CollisionShape3D/Target/Mr_ Mackinley"]

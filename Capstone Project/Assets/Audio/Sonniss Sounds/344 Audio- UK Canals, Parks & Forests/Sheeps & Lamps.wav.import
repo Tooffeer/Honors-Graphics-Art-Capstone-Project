@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://yrtlxa6yw141"
+path="res://.godot/imported/Sheeps & Lamps.wav-abf58346fddb04eef751ebb7daf4cef6.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Sonniss Sounds/344 Audio- UK Canals, Parks & Forests/Sheeps & Lamps.wav"
+dest_files=["res://.godot/imported/Sheeps & Lamps.wav-abf58346fddb04eef751ebb7daf4cef6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

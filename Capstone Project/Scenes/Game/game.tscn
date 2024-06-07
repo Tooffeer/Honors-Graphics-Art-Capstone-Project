@@ -1,9 +1,42 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0gq28um20d1y"]
+[gd_scene load_steps=5 format=3 uid="uid://d0gq28um20d1y"]
 
 [ext_resource type="Script" path="res://scenes/Game/game.gd" id="1_40ddj"]
 [ext_resource type="PackedScene" uid="uid://csbipluxt5wgp" path="res://Scenes/TitleScreen/title_screen.tscn" id="4_0aujd"]
+
+[sub_resource type="SystemFont" id="SystemFont_tc163"]
+font_names = PackedStringArray("Javanese Text")
+
+[sub_resource type="LabelSettings" id="LabelSettings_1fv28"]
+font = SubResource("SystemFont_tc163")
+font_size = 200
 
 [node name="Game" type="Node"]
 script = ExtResource("1_40ddj")
 
 [node name="TitleScreen" parent="." instance=ExtResource("4_0aujd")]
+
+[node name="GameOVer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="GameOVer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="GameOVer/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -258.5
+offset_top = -100.5
+offset_right = 258.5
+offset_bottom = 100.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "The End"
+label_settings = SubResource("LabelSettings_1fv28")

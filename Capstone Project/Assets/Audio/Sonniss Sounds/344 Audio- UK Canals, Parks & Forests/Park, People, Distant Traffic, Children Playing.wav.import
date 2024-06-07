@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://chfsv36ea6pnq"
+path="res://.godot/imported/Park, People, Distant Traffic, Children Playing.wav-8eb02e6e15ec9f609fb226cf4c5d248e.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Sonniss Sounds/344 Audio- UK Canals, Parks & Forests/Park, People, Distant Traffic, Children Playing.wav"
+dest_files=["res://.godot/imported/Park, People, Distant Traffic, Children Playing.wav-8eb02e6e15ec9f609fb226cf4c5d248e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

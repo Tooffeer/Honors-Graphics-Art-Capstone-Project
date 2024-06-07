@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://y0qwee3fait1"]
+[gd_scene load_steps=5 format=3 uid="uid://y0qwee3fait1"]
 
 [ext_resource type="Script" path="res://Scenes/Collectable/Collectable.gd" id="1_qav4w"]
 [ext_resource type="PackedScene" uid="uid://dc66qk16lq47g" path="res://Assets/Blender/Bagel/Bagel.blend" id="2_6xfa2"]
+[ext_resource type="AudioStream" uid="uid://dhm48gbmyexvl" path="res://Assets/Audio/Sonniss Sounds/Zombie Bite 04.wav" id="3_yw0gs"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_deuxl"]
 radius = 0.829167
@@ -18,5 +19,9 @@ shape = SubResource("SphereShape3D_deuxl")
 
 [node name="Bagel" parent="." instance=ExtResource("2_6xfa2")]
 transform = Transform3D(1, 0, 0, 0, 0.927217, -0.374526, 0, 0.374526, 0.927217, 0, 0, 0)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_yw0gs")
+pitch_scale = 1.36
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
